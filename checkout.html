@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+            display: none !important;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>IATA | NDC Demonstrator | Find a flight</title>
+    <meta name="description" content="">
+    <meta id="Viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <link rel="stylesheet" href="gallery.css" media="all">
+    <link href="images/app/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="images/app/favicon.png" rel="icon" type="image/png">
+    <link href="images/app/touch.png" rel="apple-touch-icon" type="image/png">
+    <link rel="stylesheet" href="bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <link rel="stylesheet" href="cbt.css" media="all">
+    <style type="text/css"></style><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="main" src="scripts/main.js"></script></head>
+<body class="tmc-search tmc">
+<nav ng-controller="menuController" class="iata ng-scope">
+    <button type="button" ng-click="showXSMenu = !showXSMenu" class="btn-default btn-xs-menu visible-xs"><i class="fa fa-bars"></i></button><a href="#/">
+    <div class="logo">NDC<span>Demonstrator</span></div></a>
+    <div class="user-data pull-right">
+        <div class="column">
+            <div><span class="adjust-span-position text-right ng-binding">Marsha Anderson</span></div>
+            <div class="text-gray text-right"><span class="ng-binding">Executive</span></div>
+        </div>
+        <div class="column align-middle"><img ng-src="images/app/profile/marsha.jpg" width="35px" height="35px" class="persona-picture img-circle" src="images/app/profile/marsha.jpg"></div>
+    </div>
+    <ul ng-class="{'hidden-xs': !showXSMenu}" class="toggles hidden-xs">
+        <li><a href="#/personas" ng-click="personas()" class="">Personas</a></li>
+        <li><a href="#/search" ng-click="search()" class="">Search</a></li>
+        <li><a href="#/admin" ng-click="admin()" class="">Admin</a></li>
+        <li><a uib-dropdown="" ng-click="showReports = !showReports" class="dropdown">Reports</a>
+            <ul ng-class="{'hidden-xs': !showReports}" class="hidden-xs">
+                <!-- ngRepeat: link in items --><li ng-repeat="link in items" class="ng-scope"><a ng-click="ancillaryInfo();" class="ng-binding">Ancillary Info</a></li><!-- end ngRepeat: link in items --><li ng-repeat="link in items" class="ng-scope"><a ng-click="ancillaryDashboard();" class="ng-binding">Ancillary Dashboard</a></li><!-- end ngRepeat: link in items -->
+            </ul>
+        </li>
+    </ul>
+    <div class="bar"></div>
+</nav>
+<!-- ngView: undefined --><div class="page-wrap ng-view ng-scope">
+    <div class="container-fluid checkout-page ng-scope">
+        <div class="row selected-flight">
+            <div class="col-xs-12 selected-flight-text text-center strong"><span>Selected Flight</span></div>
+        </div>
+        <!-- ngRepeat: direction in ['outbound', 'inbound'] track by $index --><div ng-repeat="direction in ['outbound', 'inbound'] track by $index" class="row outbound-ticket-body ng-scope">
+        <div class="strong outbound-ticket text-capitalize ng-binding">outbound</div>
+        <!-- ngRepeat: segment in flight[direction].segments --><div ng-repeat="segment in flight[direction].segments" ng-class="{ 'border-no-bottom' : flight[direction].segments.length > 1 &amp;&amp; flight[direction].segments.length-1 == $index }" class="col-xs-12 ticket-body-segment ng-scope">
+        <div class="col-xs-12 segment-optionals row-eq-height text-center">
+            <div class="col-md-2 col-sm-3 col-xs-3">
+                <div class="airline-logo"><img ng-src="images/app/logos/ol.jpg" alt="Airline logo" src="images/app/logos/ol.jpg"></div>
+                <div class="ng-binding">OL-75</div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-from"><span class="icon"><span class="capital ng-binding">Charles de Gaulle International&nbsp;</span><span class="strong ng-binding">(CDG)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">10:15</span></div>
+            </div>
+            <div class="col-xs-1 arrow-picture"></div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-to"><span class="icon capital ng-binding">London Heathrow&nbsp;<span class="strong ng-binding">(LHR)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">11:10</span></div>
+            </div>
+            <div class="col-md-3 visible-md visible-lg fare-price">
+                <div><span class="ng-binding">Non-Flex&nbsp;</span><span class="strong ng-binding">economy</span></div>
+                <div><span class="jet ng-binding">(777-300 jet)</span></div>
+            </div>
+            <!-- ngIf: $index === 0 --><div ng-if="$index === 0" class="col-xs-2 ticket-body-price text-right ng-scope"><span class="euro">€</span><span class="price ng-binding">944</span></div><!-- end ngIf: $index === 0 -->
+        </div>
+        <div class="col-sm-12 visible-sm visible-xs fare-price text-center">
+            <div><span class="ng-binding">Non-Flex&nbsp;</span><span class="strong ng-binding">economy</span></div>
+            <div><span class="jet ng-binding">(777-300 jet)</span></div>
+        </div>
+        <!-- ngIf: segmentOptionalAncillaries(segment.ancillaries) --><div ng-if="segmentOptionalAncillaries(segment.ancillaries)" class="col-xs-12 optionals ng-scope">
+        <div education-popup="http://checkout/optionalExtras" class="col-xs-3 col-md-2 text-center optionals-extra ng-isolate-scope" icon-type="1" direction="bottom|left" icon-color="blue" style="position:relative;"><ng-transclude><span class="ng-scope">Optional extras</span></ng-transclude><div class="education-element-1 educational-color-blue" ns-popover="" ns-popover-template="education.html" ns-popover-trigger="mouseenter" ns-popover-placement="bottom|left" ns-popover-timeout="0"></div></div>
+        <div ng-controller="ancillaryController" class="col-xs-9 col-md-10 ng-scope">
+            <div class="row top-row">
+                <div class="col-xs-9 selected-ancillaries-block">
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                </div>
+                <!-- ngIf: !ancillaryService.isAllOptionalAncillariesDeselected(segment) -->
+            </div>
+            <div ng-class="{ 'border-no-top' : optionalTopBorder }" class="row bottom-row border-no-top">
+                <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/meal.png" src="images/css/icons/ancillary/meal.png"><span class="ancillary-price strong ng-binding">€ 15</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/first_bag.png" src="images/css/icons/ancillary/first_bag.png"><span class="ancillary-price strong ng-binding">€ 25</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/second_bag.png" src="images/css/icons/ancillary/second_bag.png"><span class="ancillary-price strong ng-binding">€ 50</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/third_bag.png" src="images/css/icons/ancillary/third_bag.png"><span class="ancillary-price strong ng-binding">€ 100</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+            </div>
+        </div>
+    </div><!-- end ngIf: segmentOptionalAncillaries(segment.ancillaries) -->
+    </div><!-- end ngRepeat: segment in flight[direction].segments --><div ng-repeat="segment in flight[direction].segments" ng-class="{ 'border-no-bottom' : flight[direction].segments.length > 1 &amp;&amp; flight[direction].segments.length-1 == $index }" class="col-xs-12 ticket-body-segment ng-scope border-no-bottom">
+        <div class="col-xs-12 segment-optionals row-eq-height text-center">
+            <div class="col-md-2 col-sm-3 col-xs-3">
+                <div class="airline-logo"><img ng-src="images/app/logos/ol.jpg" alt="Airline logo" src="images/app/logos/ol.jpg"></div>
+                <div class="ng-binding">OL-63</div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-from"><span class="icon"><span class="capital ng-binding">London Heathrow&nbsp;</span><span class="strong ng-binding">(LHR)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">14:05</span></div>
+            </div>
+            <div class="col-xs-1 arrow-picture"></div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-to"><span class="icon capital ng-binding">JFK, New York&nbsp;<span class="strong ng-binding">(JFK)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">17:55</span></div>
+            </div>
+            <div class="col-md-3 visible-md visible-lg fare-price">
+                <div><span class="ng-binding">Non-Flex&nbsp;</span><span class="strong ng-binding">economy</span></div>
+                <div><span class="jet ng-binding">(777-300 jet)</span></div>
+            </div>
+            <!-- ngIf: $index === 0 -->
+        </div>
+        <div class="col-sm-12 visible-sm visible-xs fare-price text-center">
+            <div><span class="ng-binding">Non-Flex&nbsp;</span><span class="strong ng-binding">economy</span></div>
+            <div><span class="jet ng-binding">(777-300 jet)</span></div>
+        </div>
+        <!-- ngIf: segmentOptionalAncillaries(segment.ancillaries) --><div ng-if="segmentOptionalAncillaries(segment.ancillaries)" class="col-xs-12 optionals ng-scope">
+        <div education-popup="http://checkout/optionalExtras" class="col-xs-3 col-md-2 text-center optionals-extra ng-isolate-scope" icon-type="1" direction="bottom|left" icon-color="blue" style="position:relative;"><ng-transclude><span class="ng-scope">Optional extras</span></ng-transclude><div class="education-element-1 educational-color-blue" ns-popover="" ns-popover-template="education.html" ns-popover-trigger="mouseenter" ns-popover-placement="bottom|left" ns-popover-timeout="0"></div></div>
+        <div ng-controller="ancillaryController" class="col-xs-9 col-md-10 ng-scope">
+            <div class="row top-row">
+                <div class="col-xs-9 selected-ancillaries-block">
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                </div>
+                <!-- ngIf: !ancillaryService.isAllOptionalAncillariesDeselected(segment) -->
+            </div>
+            <div ng-class="{ 'border-no-top' : optionalTopBorder }" class="row bottom-row border-no-top">
+                <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/meal.png" src="images/css/icons/ancillary/meal.png"><span class="ancillary-price strong ng-binding">€ 15</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/first_bag.png" src="images/css/icons/ancillary/first_bag.png"><span class="ancillary-price strong ng-binding">€ 25</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/second_bag.png" src="images/css/icons/ancillary/second_bag.png"><span class="ancillary-price strong ng-binding">€ 50</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/third_bag.png" src="images/css/icons/ancillary/third_bag.png"><span class="ancillary-price strong ng-binding">€ 100</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+            </div>
+        </div>
+    </div><!-- end ngIf: segmentOptionalAncillaries(segment.ancillaries) -->
+    </div><!-- end ngRepeat: segment in flight[direction].segments -->
+        <!-- ngIf: $index === 1 -->
+    </div><!-- end ngRepeat: direction in ['outbound', 'inbound'] track by $index --><div ng-repeat="direction in ['outbound', 'inbound'] track by $index" class="row outbound-ticket-body ng-scope">
+        <div class="strong outbound-ticket text-capitalize ng-binding">inbound</div>
+        <!-- ngRepeat: segment in flight[direction].segments --><div ng-repeat="segment in flight[direction].segments" ng-class="{ 'border-no-bottom' : flight[direction].segments.length > 1 &amp;&amp; flight[direction].segments.length-1 == $index }" class="col-xs-12 ticket-body-segment ng-scope">
+        <div class="col-xs-12 segment-optionals row-eq-height text-center">
+            <div class="col-md-2 col-sm-3 col-xs-3">
+                <div class="airline-logo"><img ng-src="images/app/logos/zs.jpg" alt="Airline logo" src="images/app/logos/zs.jpg"></div>
+                <div class="ng-binding">ZS-100</div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-from"><span class="icon"><span class="capital ng-binding">JFK, New York&nbsp;</span><span class="strong ng-binding">(JFK)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">15:50</span></div>
+            </div>
+            <div class="col-xs-1 arrow-picture"></div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-to"><span class="icon capital ng-binding">Frankfurt International&nbsp;<span class="strong ng-binding">(FRA)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">05:35</span></div>
+            </div>
+            <div class="col-md-3 visible-md visible-lg fare-price">
+                <div><span class="ng-binding">Changeable&nbsp;</span><span class="strong ng-binding">economy</span></div>
+                <div><span class="jet ng-binding">(747-400 jet)</span></div>
+            </div>
+            <!-- ngIf: $index === 0 --><div ng-if="$index === 0" class="col-xs-2 ticket-body-price text-right ng-scope"><span class="euro">€</span><span class="price ng-binding">944</span></div><!-- end ngIf: $index === 0 -->
+        </div>
+        <div class="col-sm-12 visible-sm visible-xs fare-price text-center">
+            <div><span class="ng-binding">Changeable&nbsp;</span><span class="strong ng-binding">economy</span></div>
+            <div><span class="jet ng-binding">(747-400 jet)</span></div>
+        </div>
+        <!-- ngIf: segmentOptionalAncillaries(segment.ancillaries) --><div ng-if="segmentOptionalAncillaries(segment.ancillaries)" class="col-xs-12 optionals ng-scope">
+        <div education-popup="http://checkout/optionalExtras" class="col-xs-3 col-md-2 text-center optionals-extra ng-isolate-scope" icon-type="1" direction="bottom|left" icon-color="blue" style="position:relative;"><ng-transclude><span class="ng-scope">Optional extras</span></ng-transclude><div class="education-element-1 educational-color-blue" ns-popover="" ns-popover-template="education.html" ns-popover-trigger="mouseenter" ns-popover-placement="bottom|left" ns-popover-timeout="0"></div></div>
+        <div ng-controller="ancillaryController" class="col-xs-9 col-md-10 ng-scope">
+            <div class="row top-row">
+                <div class="col-xs-9 selected-ancillaries-block">
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                </div>
+                <!-- ngIf: !ancillaryService.isAllOptionalAncillariesDeselected(segment) -->
+            </div>
+            <div ng-class="{ 'border-no-top' : optionalTopBorder }" class="row bottom-row border-no-top">
+                <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/second_bag.png" src="images/css/icons/ancillary/second_bag.png"><span class="ancillary-price strong ng-binding">€ 50</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/third_bag.png" src="images/css/icons/ancillary/third_bag.png"><span class="ancillary-price strong ng-binding">€ 100</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+            </div>
+        </div>
+    </div><!-- end ngIf: segmentOptionalAncillaries(segment.ancillaries) -->
+    </div><!-- end ngRepeat: segment in flight[direction].segments --><div ng-repeat="segment in flight[direction].segments" ng-class="{ 'border-no-bottom' : flight[direction].segments.length > 1 &amp;&amp; flight[direction].segments.length-1 == $index }" class="col-xs-12 ticket-body-segment ng-scope border-no-bottom">
+        <div class="col-xs-12 segment-optionals row-eq-height text-center">
+            <div class="col-md-2 col-sm-3 col-xs-3">
+                <div class="airline-logo"><img ng-src="images/app/logos/zs.jpg" alt="Airline logo" src="images/app/logos/zs.jpg"></div>
+                <div class="ng-binding">ZS-12</div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-from"><span class="icon"><span class="capital ng-binding">Frankfurt International&nbsp;</span><span class="strong ng-binding">(FRA)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">07:00</span></div>
+            </div>
+            <div class="col-xs-1 arrow-picture"></div>
+            <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                <div>
+                    <div class="time-to"><span class="icon capital ng-binding">Charles de Gaulle International&nbsp;<span class="strong ng-binding">(CDG)</span></span></div>
+                </div>
+                <div><span class="strong ng-binding">08:15</span></div>
+            </div>
+            <div class="col-md-3 visible-md visible-lg fare-price">
+                <div><span class="ng-binding">Changeable&nbsp;</span><span class="strong ng-binding">economy</span></div>
+                <div><span class="jet ng-binding">(Boeing 32A jet)</span></div>
+            </div>
+            <!-- ngIf: $index === 0 -->
+        </div>
+        <div class="col-sm-12 visible-sm visible-xs fare-price text-center">
+            <div><span class="ng-binding">Changeable&nbsp;</span><span class="strong ng-binding">economy</span></div>
+            <div><span class="jet ng-binding">(Boeing 32A jet)</span></div>
+        </div>
+        <!-- ngIf: segmentOptionalAncillaries(segment.ancillaries) --><div ng-if="segmentOptionalAncillaries(segment.ancillaries)" class="col-xs-12 optionals ng-scope">
+        <div education-popup="http://checkout/optionalExtras" class="col-xs-3 col-md-2 text-center optionals-extra ng-isolate-scope" icon-type="1" direction="bottom|left" icon-color="blue" style="position:relative;"><ng-transclude><span class="ng-scope">Optional extras</span></ng-transclude><div class="education-element-1 educational-color-blue" ns-popover="" ns-popover-template="education.html" ns-popover-trigger="mouseenter" ns-popover-placement="bottom|left" ns-popover-timeout="0"></div></div>
+        <div ng-controller="ancillaryController" class="col-xs-9 col-md-10 ng-scope">
+            <div class="row top-row">
+                <div class="col-xs-9 selected-ancillaries-block">
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                    <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: personalizationService.isApplicableToPersona(flight[direction]) && ancillaryService.isOptionalAncillary(ancillary) && ancillaryService.isPersonalizedAncillary(ancillary, persona) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+                </div>
+                <!-- ngIf: !ancillaryService.isAllOptionalAncillariesDeselected(segment) -->
+            </div>
+            <div ng-class="{ 'border-no-top' : optionalTopBorder }" class="row bottom-row border-no-top">
+                <!-- ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/second_bag.png" src="images/css/icons/ancillary/second_bag.png"><span class="ancillary-price strong ng-binding">€ 50</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries --><!-- ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block ng-scope">
+                <label>
+                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden ng-pristine ng-untouched ng-valid"><span class="checkbox"></span>
+                </label><img ng-src="images/css/icons/ancillary/third_bag.png" src="images/css/icons/ancillary/third_bag.png"><span class="ancillary-price strong ng-binding">€ 100</span>
+            </div><!-- end ngIf: ancillaryService.isOptionalAncillary(ancillary) && !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) --><!-- end ngRepeat: ancillary in segment.ancillaries -->
+            </div>
+        </div>
+    </div><!-- end ngIf: segmentOptionalAncillaries(segment.ancillaries) -->
+    </div><!-- end ngRepeat: segment in flight[direction].segments -->
+        <!-- ngIf: $index === 1 --><div ng-if="$index === 1" class="col-xs-12 total-section text-right ng-scope"><span class="total-text">Total</span><span class="euro total">€</span><span class="price ng-binding">944</span></div><!-- end ngIf: $index === 1 -->
+    </div><!-- end ngRepeat: direction in ['outbound', 'inbound'] track by $index -->
+        <div class="row return-section">
+            <div class="col-xs-6 text-left return-section-text"><i class="fa fa-chevron-left"></i><a href="/#search/noReset">BACK</a></div>
+            <div class="col-xs-6 text-right return-section-button"><a href="/#/itinerary" class="btn btn-primary select-btn capital">Book</a></div>
+        </div>
+    </div>
+</div>
+<script data-main="scripts/main" src="scripts/require.js"></script>
+<script type="text/ng-template" id="landing-page.html">
+    <div class="landing-page">
+        <div class="container">
+            <div>
+                <h1>IATA NDC-Powered Corporate Booking Tool Demonstrator</h1>
+            </div>
+            <div>
+                <h2>Background and context</h2>
+                <p class="text-justify">
+                    IATA has involved core industry stakeholders in defining a new standard for the exchange of information in airline retail.
+                    This New Distribution Capability (NDC) will enable the travel industry to transform the way air products are retailed to corporations,
+                    by addressing the industry’s current distribution limitations: product differentiation and time-to market, access to full and rich air content and transparent shopping experience.
+                    IATA's NDC standard benefits the business traveller, the corporate, the agency, the GDS providers, technology providers and the airlines.
+                </p>
+                <p class="text-justify">
+                    The purpose of this Demonstrator is to provide visual representation of how an "NDC-Powered" Corporate Booking Tool could benefit all parties, particularly the business travel buyer and the business traveller.
+                    It provides a sand-box for interested parties to explore *some* of the unique aspects of how NDC might help improve the business travel landscape.
+                </p>
+                <p class="text-justify">
+                    This is an educational sandbox, not a system. IATA has no intention of building a system. NDC is simply a standard.
+                    Read more and stay updated on the <a href="http://www.iata.org/ndc">IATA NDC program website.</a>
+                </p>
+            </div>
+            <div>
+                <h2>How best to explore the sandbox</h2>
+                <p class="text-justify"> You can start anywhere you wish, by clicking on a menu item that closest resembles your interests.
+                <ul class="default">
+                    <li>The Personas section sets the context of different users and what roles and rights they have. Clicking on a user type will take you to a search page with their profile activated.</li>
+                    <li>The Search section is where one can search for flights, based on the user role selected in Personas. This is where you can explore optional ancillary purchases, easy like-for-like comparison of alternatives and various other aspects.</li>
+                    <li>The Admin section summarizes the policy set-up for which this Sandbox is configured.</li>
+                    <li>
+                        The Reporting section gives a taster for the type of visualizations Corporate Booking Tools might use with NDC-powered data. Clicking here configures you as the Travel Manager Persona, so bear that
+                        in mind if you do subsequent searches.
+                    </li>
+                </ul>
+                </p>
+                <p class="text-justify"> If you prefer to rather what a video outlining the various aspects then click<a href=" https://www.youtube.com/watch?v=ZNgihpXInJ4&amp;feature=youtu.be">here.</a> Also available shortly in Chinese, Spanish, French, Portuguese, German.</p>
+            </div>
+            <div>
+                <h2 education-popup="http://landingPage">Educational content as you navigate the sandbox</h2>
+                <p class="text-justify">
+                    Throughout the Demonstrator you will notice educational alert icons such as the one to the top left of this paragraph.
+                    This highlights unique features that NDC could enable in Corporate Booking Tools.
+                    Simply hover over the alert to better understand the specific feature.
+                </p>
+            </div>
+            <div>
+                <h2>Approvals</h2>
+                <p class="text-justify"></p>
+                <p class="text-justify">
+                    This Demonstrator does not attempt to cover all aspects of a corporate booking tool.
+                    Some common features of normal booking tools are missing from this Demonstrator. These include approval for example.
+                </p>
+                <p class="text-justify">
+                    Whilst approval is missing from the demonstrator, it should be said that NDC would enrich the type of information available to
+                    approvers, both for pre-trip and in-trip approvals, as shown below. Typically these approvals are made by busy executives on a mobile device
+                    but e-mail or web approval are also naturally possible.
+                </p>
+            </div>
+            <div class="row image-row">
+                <div class="col-sm-4"><img src="images/app/approval/preTripApproval.png" class="img-responsive"></div>
+                <div class="col-sm-4"><img src="images/app/approval/midTripApproval.png" class="img-responsive"></div>
+            </div>
+            <div>
+                <h2>Ancillary purchases during travel</h2>
+                <p class="text-justify">
+                    This Demonstrator doesn't focus on Traveller Tools, for bookings and related services once a trip is initiated. However, an NDC-Powered solution would
+                    certainly benefit travellers whilst they are on the road.
+                    With NDC, one can now push additional service information to mobile and enable the purchase of ancillaries on the go.
+                    This information gets tied back to the original order and enhances real-time reporting and approval of all aspects of airline spend.
+                </p>
+            </div>
+            <div class="row image-row">
+                <div class="col-sm-4"><img src="images/app/travellerTools/AncillaryOnMobileFastTrackScreen01.jpg" class="img-responsive"></div>
+                <div class="col-sm-4"><img src="images/app/travellerTools/AncillaryOnMobileFastTrackScreen02.jpg" class="img-responsive"></div>
+                <div class="col-sm-4"><img src="images/app/travellerTools/AncillaryOnMobileFastTrackScreen03.jpg" class="img-responsive"></div>
+            </div>
+            <div>
+                <h2>Disclaimer</h2>
+                <p class="text-justify">
+                    This demonstrator is for illustrative and educational purposes only.  The fares and availability information are made up and hard-coded and any similarity to existing Airlines are purely coincidental.
+                    The ancillary images that feature herein have been extracted from publicly available data, but the Airlines these images belong to are in no way indicating that they are NDC compliant, or that they will be adopting NDC.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"><a href="http://www.iata.org"><img src="images/app/logo-iata-2012.png"></a></div>
+                <div class="col-sm-2"><a href="http://www.ross.consulting"><img src="images/app/logo-ross-consulting.png"></a></div>
+                <div class="col-sm-2"><a href="http://www.festive-road.com"><img src="images/app/logo-festive-road.png"></a></div>
+                <div class="col-sm-2"><a href="http://www.travel-think.com.com"><img src="images/app/logo-travel-think.png"></a></div>
+                <div class="col-sm-2"><a href="http://www.thoughtworks.com"><img src="images/app/logo-tw-200.png" class="logo-tw"></a></div>
+            </div>
+            <div class="text-justify">
+                <p>
+                    Version 2.0 of this Demonstrator has been developed by Ross Consulting. It updated version 1.0 (developed by Thoughtworks), based on
+                    a gap analysis performed by Festive Road. TravelThink assisted in the Gap Analysis and the educational content prepared as part of the Version 2.0 upgrade.
+                </p>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="admin.html">
+    <div ng-controller="adminController" class="admin-page">
+        <div class="container-fluid">
+            <div admin-table ng-repeat="tableRow in tables track by $index" class="row header-row"></div>
+            <div admin-table admin-table-template="distribution-table-row.html" class="row header-row"></div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="table-row.html">
+    <div class="col-lg-4 col-lg-offset-1 col-lg-offset-right-1 col-md-6 admin-table-box">
+        <div class="row header-section-admin header-text">
+            <div ng-if="tableRow[0].header.button" class="col-xs-6 text-left">
+                <div ng-if="tableRow[0].header.text == 'Ancillaries'" education-popup="http://admin/PoliciesOnAncillaryPurchase"></div><span>{{ tableRow[0].header.text }}</span>
+            </div>
+            <div ng-if="tableRow[0].header.button" class="col-xs-6 text-right button-container">
+                <button class="btn btn-warning btn-new-policies pull-right">+ New Policies</button>
+            </div>
+            <div ng-if="!tableRow[0].header.button" class="col-md-12 text-left"><span>{{ tableRow[0].header.text }}</span></div>
+        </div>
+        <div ng-include="'admin-table-body-header.html'" ng-if="!tableRow[0].header.hideBodyHeader" class="row content-section-admin"></div>
+        <div ng-repeat="row in tableRow[0].body track by $index" ng-class="{'gray' : $index != 0 &amp;&amp; $index%2 != 0, 'bottom' : $index != 5 }" ng-include="'admin-table-body-content.html'" class="row content-section-admin table-border"></div>
+        <div ng-if="tableRow[0].view" ng-include="tableRow[0].view.name" class="row content-section-admin table-border"></div>
+    </div>
+    <div ng-if="tableRow[1]" class="col-lg-4 col-lg-offset-right-2 col-md-6 admin-table-box">
+        <div class="row header-section-admin header-text">
+            <div ng-if="tableRow[1].header.button" class="col-xs-6 text-left">
+                <div ng-if="tableRow[1].header.text == 'Content'" education-popup="http://admin/PoliciesOnContent" direction="bottom|left"></div><span>{{ tableRow[1].header.text }}</span>
+            </div>
+            <div ng-if="tableRow[1].header.button" class="col-xs-6 text-right button-container">
+                <button class="btn btn-warning btn-new-policies pull-right">+ New Policies</button>
+            </div>
+            <div ng-if="!tableRow[1].header.button" class="col-md-12 text-left"><span>{{ tableRow[1].header.text }}</span></div>
+        </div>
+        <div ng-include="'admin-table-body-header.html'" class="row content-section-admin"></div>
+        <div ng-class="{'gray' : $index != 0 &amp;&amp; $index%2 != 0, 'bottom' : $index != 6 }" ng-repeat="row in tableRow[1].body track by $index" ng-include="'admin-table-body-content.html'" class="row content-section-admin table-border"></div>
+        <div ng-if="tableRow[1].view" class="row content-section-admin table-border bottom empty gray"></div>
+        <div ng-if="tableRow[1].view" ng-include="tableRow[1].view.name" class="row content-section-admin no-padding"></div>
+    </div>
+</script>
+<script type="text/ng-template" id="distribution-table-row.html">
+    <div class="col-lg-4 col-lg-offset-1 col-lg-offset-right-1 col-md-6 admin-table-box">
+        <div class="row header-section-admin header-text">
+            <div ng-if="!distributionTable.header.button" class="col-md-12 text-left">
+                <div ng-if="distributionTable.header.text == 'Distribution channels'" education-popup="http://admin/PoliciesOnDistibutionChannels" direction="top|left"></div><span>{{ distributionTable.header.text }}</span>
+            </div>
+            <div ng-if="distributionTable.header.button" class="col-xs-6 text-left"><span>{{ distributionTable.header.text }}</span></div>
+            <div ng-if="distributionTable.header.button" class="col-xs-6 text-right">
+                <button class="btn btn-warning btn-new-policies pull-right">+ New Policies</button>
+            </div>
+        </div>
+        <div ng-include="'distribution-table-body-header.html'" ng-if="!distributionTable.header.hideBodyHeader" class="row content-section-admin"></div>
+        <div ng-repeat="row in distributionTable.body track by $index" ng-class="{'gray' : $index != 0 &amp;&amp; $index%2 != 0, 'bottom' : $index != 5 }" ng-include="'distribution-table-body-content.html'" class="row content-section-admin table-border"></div>
+        <div ng-if="tableRow.view" ng-include="tableRow.view.name" class="row content-section-admin table-border"></div>
+    </div>
+</script>
+<script type="text/ng-template" id="admin-ancillaries-table-appendix.html">
+    <div class="col-xs-7">Baggage Allowed</div>
+    <div class="col-xs-1 no-padding-left">
+        <input type="number" name="baggage_1" value="3" min="1" max="3" disabled>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1 no-padding-left">
+        <input type="number" name="baggage_2" value="3" min="1" max="3" disabled>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1 no-padding-left">
+        <input type="number" name="baggage_3" value="3" min="1" max="3" disabled>
+    </div>
+</script>
+<script type="text/ng-template" id="admin-carriers-table-appendix.html">
+    <div class="col-xs-6 table-border right">
+        <div class="row carriers-text table-border bottom">
+            <div class="col-xs-9"><span>Preferred Carriers</span></div>
+            <div class="col-xs-3">
+                <button class="btn btn-warning btn-xs btn-new-carrier">+Add</button>
+            </div>
+        </div>
+        <div class="row carriers-text table-border gray">
+            <div class="col-xs-9"><span class="carrier-span">Demeter Air</span></div>
+            <div class="col-xs-3 no-padding-right text-center"><i class="do-padding-top fa fa-trash-o fa-2"></i></div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="row carriers-text table-border bottom">
+            <div class="col-xs-9"><span>Blacklisted Carriers</span></div>
+            <div class="col-xs-3">
+                <button class="btn btn-warning btn-xs btn-new-carrier">+Add</button>
+            </div>
+        </div>
+        <div class="row carriers-text table-border gray">
+            <div class="col-xs-9"><span class="carrier-span">Hypnos Air</span></div>
+            <div class="col-xs-3 no-padding-right text-center"><i class="do-padding-top fa fa-trash-o fa-2"></i></div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="admin-table-body-header.html">
+    <div class="col-xs-6 col-xs-offset-6">
+        <div class="col-xs-4 text-center border-orange">Normal</div>
+        <div class="col-xs-4 text-center border-purple">Exec</div>
+        <div class="col-xs-4 text-center border-red">Director</div>
+    </div>
+</script>
+<script type="text/ng-template" id="distribution-table-body-header.html">
+    <div class="col-xs-6 col-xs-offset-6 row-eq-height">
+        <div class="col-xs-4 text-center border-orange">GDS</div>
+        <div class="col-xs-4 text-center border-purple">Direct Connect</div>
+        <div class="col-xs-4 text-center border-red">Aggregator A</div>
+    </div>
+</script>
+<script type="text/ng-template" id="admin-table-body-content.html">
+    <div class="col-xs-7">{{ row.text }}</div>
+    <div class="col-xs-1 checkboxes-green text-center">
+        <label>
+            <input type="checkbox" ng-model="row.checkboxes.normal" ng-change="" disabled class="hidden"><span class="checkbox"></span>
+        </label>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1 checkboxes-green text-center">
+        <label>
+            <input type="checkbox" ng-model="row.checkboxes.exec" ng-change="" disabled class="hidden"><span class="checkbox"></span>
+        </label>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1 checkboxes-green text-center">
+        <label>
+            <input type="checkbox" ng-model="row.checkboxes.dir" ng-change="" disabled class="hidden"><span class="checkbox"></span>
+        </label>
+    </div>
+</script>
+<script type="text/ng-template" id="distribution-table-body-content.html">
+    <div class="col-xs-7">{{ row.text }}</div>
+    <div class="col-xs-1 checkboxes-green text-center">
+        <label>
+            <input type="checkbox" ng-model="row.checkboxes.gdc" ng-change="" disabled class="hidden"><span class="checkbox"></span>
+        </label>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1 checkboxes-green text-center">
+        <label>
+            <input type="checkbox" ng-model="row.checkboxes.directConn" ng-change="" disabled class="hidden"><span class="checkbox"></span>
+        </label>
+    </div>
+    <div class="col-xs-1 col-xs-offset-1 checkboxes-green text-center">
+        <label>
+            <input type="checkbox" ng-model="row.checkboxes.aggA" ng-change="" disabled class="hidden"><span class="checkbox"></span>
+        </label>
+    </div>
+</script>
+<script type="text/ng-template" id="personas.html">
+    <div class="persona-page">
+        <div class="container">
+            <div class="row">
+                <h1 education-popup="http://personas">Personas</h1>
+            </div>
+            <div ng-repeat="persona in personasList | orderBy:'order'" class="row">
+                <div ng-class="persona.cssClass" ng-click="setPersona(persona)" class="persona">
+                    <div class="persona-decoration">
+                        <div class="persona-image"><img ng-src="{{persona.image}}" class="persona-picture"></div>
+                        <div class="persona-bio">
+                            <h3>{{persona.name}}</h3><span class="user-level">{{persona.group}}</span>
+                        </div>
+                    </div>
+                    <ul class="access-levels">
+                        <li ng-repeat="level in persona.levels">{{level}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="reports.html">
+    <div ng-controller="reportsController" class="reports-page">
+        <div class="container-fluid content-custom-container">
+            <div ng-show="reportType == 'ancillary_info'" class="ancillary-report">
+                <div ng-include="'report-header.html'" class="row page-header-custom"></div>
+                <div class="row info-table">
+                    <div class="col-md-7 table-container-custom col-md-offset-1">
+                        <div class="row table-header-red row-eq-height">
+                            <div class="col-md-9 text-left table-row-red"><span class="strong">Booked Ancillaries</span><span>(Optional extras in unbundled fares)</span></div>
+                            <div class="col-md-3 text-right table-row-red button-row pos-relative">
+                                <button class="btn btn-warning btn-new-policies">+ Export to excell</button><i class="fa fa-file-excel-o excell-icon pos-absolute"></i>
+                            </div>
+                        </div>
+                        <div class="row table-header-green text-center row-eq-height">
+                            <div class="col-xs-5 table-row-green border-green text-left"><span>Ancillary</span></div>
+                            <div class="col-xs-2 table-row-green border-orange"><span>Number of bookings</span></div>
+                            <div class="col-xs-2 table-row-green border-purple"><span>Spend (EUR)</span></div>
+                            <div class="col-xs-1 table-row-green border-red"><span>Average Cost (EUR)</span></div>
+                            <div class="col-xs-1 table-row-green border-teal"><span>Short Haul</span></div>
+                            <div class="col-xs-1 table-row-green border-yellow"><span>Long Haul</span></div>
+                        </div>
+                        <div ng-repeat="ancillary in bookedAncillaries track by $index" ng-class="{ 'gray': $index != 0 &amp;&amp; $index%2 != 0 }" class="row content-row text-center border-bottom clearfix">
+                            <div class="col-xs-5 text-left"><img src="{{ ancillary.icon }}" width="20px" height="20px" class="pull-left image-circle"><span>{{ ancillary.text }}</span></div>
+                            <div class="col-xs-2"><span>{{ ancillary.bookings | ancillaryReport }}</span></div>
+                            <div class="col-xs-2"><span>{{ ancillary.spend | ancillaryReport }}</span></div>
+                            <div class="col-xs-1 text-right"><span>{{ ancillary.cost | ancillaryReport }}</span></div>
+                            <div class="col-xs-1 text-right"><span>{{ ancillary.short | ancillaryReport }}</span></div>
+                            <div class="col-xs-1 text-right"><span>{{ ancillary.long | ancillaryReport }}</span></div>
+                        </div>
+                        <div class="row content-row text-center border-bottom text-color-green">
+                            <div class="col-xs-5 content-cell total-padding"><span class="capital">Total</span></div>
+                            <div class="col-xs-2 content-cell"><span>{{ getTotal('bookings', bookedAncillaries) }}</span></div>
+                            <div class="col-xs-2 content-cell"><span>{{ getTotal('spend', bookedAncillaries) }}</span></div>
+                            <div class="col-xs-1 content-cell text-right"><span>{{ getTotal('cost', bookedAncillaries) }}</span></div>
+                            <div class="col-xs-1 content-cell text-right"><span>{{ getTotal('short', bookedAncillaries) }}</span></div>
+                            <div class="col-xs-1 content-cell text-right"><span>{{ getTotal('long', bookedAncillaries) }}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row info-table">
+                    <div class="col-md-7 table-container-custom col-md-offset-1">
+                        <div class="row table-header-red row-eq-height">
+                            <div class="col-md-9 text-left table-row-red"><span class="strong">Included Ancillaries</span><span>(Bundled into Fare)</span></div>
+                            <div class="col-md-3 text-right table-row-red button-row pos-relative">
+                                <button class="btn btn-warning btn-new-policies">+ Export to excell</button><i class="fa fa-file-excel-o excell-icon pos-absolute"></i>
+                            </div>
+                        </div>
+                        <div class="row table-header-green text-center row-eq-height">
+                            <div class="col-xs-5 table-row-green border-green text-left"><span>Ancillary</span></div>
+                            <div class="col-xs-3 table-row-green border-orange"><span>Number of inclusions</span></div>
+                            <div class="col-xs-2 table-row-green border-purple"><span>Included in Short Haul</span></div>
+                            <div class="col-xs-2 table-row-green border-red"><span>Included in Long Haul</span></div>
+                        </div>
+                        <div ng-repeat="ancillary in includedAncillaries track by $index" ng-class="{ 'gray': $index != 0 &amp;&amp; $index%2 != 0 }" class="row content-row text-center border-bottom">
+                            <div class="col-xs-5 text-left"><img src="{{ ancillary.icon }}" width="20px" height="20px" class="pull-left image-circle"><span>{{ ancillary.text }}</span></div>
+                            <div class="col-xs-3"><span>{{ ancillary.inclusions | ancillaryReport }}</span></div>
+                            <div class="col-xs-2"><span>{{ ancillary.short | ancillaryReport }}</span></div>
+                            <div class="col-xs-2"><span>{{ ancillary.long | ancillaryReport }}</span></div>
+                        </div>
+                        <div class="row content-row text-center border-bottom text-color-green">
+                            <div class="col-xs-5 content-cell total-padding"><span class="capital">Total</span></div>
+                            <div class="col-xs-3 content-cell"><span>{{ getTotal('inclusions', includedAncillaries) }}</span></div>
+                            <div class="col-xs-2 content-cell"><span>{{ getTotal('short', includedAncillaries) }}</span></div>
+                            <div class="col-xs-2 content-cell"><span>{{ getTotal('long', includedAncillaries) }}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="reportType == 'ancillary_dashboard'" class="ancillary-report">
+                <div ng-include="'dashboard-header.html'" class="row page-header-custom"></div>
+                <div class="row"><img ng-src="images/css/backgrounds/reporting.png" width="100%" height="100%"></div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="report-header.html">
+    <div education-popup="http://reports/ancillaries/ancillaryInfoReport" class="col-sm-7 page-name">
+        <h4 class="strong capital">Ancillary Report Info</h4>
+    </div>
+    <div class="col-sm-1 col-xs-3 col-sm-offset-1 text-center options"><span class="label label-warning">Today</span></div>
+    <div class="col-sm-1 col-xs-3 text-center options border-right"><span>This Week</span></div>
+    <div class="col-sm-1 col-xs-3 text-center options border-right"><span>This Month</span></div>
+    <div class="col-sm-1 col-xs-3 text-center options"><span>This Year</span></div>
+</script>
+<script type="text/ng-template" id="dashboard-header.html">
+    <div education-popup="http://reports/ancillaries/ancillaryDashboard" class="col-sm-7 page-name">
+        <h4 class="strong capital">Ancillary Dashboard</h4>
+    </div>
+</script>
+<script type="text/ng-template" id="search.html">
+    <div class="progress">
+        <div class="contentWrapper">
+            <div class="content"></div>
+        </div>
+    </div>
+    <!--.side.hidden-xs
+    .side-bar-tabs
+      .side-bar-tab.upsell(data-tab-content="#upsell-side") Upsell
+      .side-bar-tab.policy.active(data-tab-content="#profile-side") Policy
+
+    //.side-bar
+      #upsell-side.side-bar-section
+        .nano
+          .sliderContent
+            include sidebar/upsell
+
+      #profile-side.side-bar-section
+        .nano
+          .sliderContent
+            include sidebar/policyYe
+
+    -->
+    <div id="tmc_journey" class="container-fluid">
+        <div class="search-container">
+            <div ng-click="hideSearchPanel = !hideSearchPanel" class="row mobile-search-panel visible-xs">
+                <div class="col-xs-10">
+                    <div class="row">
+                        <div class="col-xs-12 text-center"><span>{{ originName }}&nbsp;<span class="strong">({{ origin }})&nbsp;</span></span><span>- {{ destinationName }}&nbsp;<span class="strong">({{ destination }})</span></span></div>
+                    </div>
+                    <div class="text-center">{{ departureDate | date:cbtDateWithYearFormat }}</div>
+                </div>
+                <div class="col-xs-2 search-panel-icon"><i class="fa fa-search"></i></div>
+            </div>
+            <div ng-init="hideSearchPanel=true" ng-class="{ 'hidden-xs': hideSearchPanel }" class="row search-row">
+                <div class="col-md-5 col-search-fields">
+                    <div class="search-panel from-to">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label for="from" title="From" class="bs-height">From</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input id="from" type="text" name="origin" ng-model="origin" disabled class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="col-sm-3">
+                                        <label for="destination" title="To" class="bs-height">To</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input id="to" type="text" name="destination" ng-model="destination" disabled class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-search-fields">
+                    <div class="search-panel">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group has-feedback">
+                                    <div class="col-sm-3">
+                                        <label title="Departure" class="bs-height control-label">Depart</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input id="from-date" type="text" name="origin-date" ng-click="departureDate.opened = !departureDate.opened" uib-datepicker-popup="{{ format }}" is-open="departureDate.opened" datepicker-options="dateOptions" show-weeks="false" ng-model="departureDate" disabled class="form-control"><i class="form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group has-feedback">
+                                    <div class="col-sm-3">
+                                        <label title="Return" class="bs-height control-label">Return</label>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input id="to-date" type="text" name="destination-date" ng-click="returnDate.opened = !returnDate.opened" uib-datepicker-popup="{{ format }}" is-open="returnDate.opened" datepicker-options="dateOptions" ng-model="returnDate" disabled class="form-control"><i class="form-control-feedback"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-search-btn">
+                    <div class="search-btn">
+                        <button ng-click="collapseAdvancedFilters()" class="btn btn-warning btn-block-binoculars"><span class="fa fa-binoculars"></span></button>
+                        <div class="search-btn-wrapper">
+                            <button id="search" type="submit" ng-click="triggerSearch(); hideSearchPanel = !hideSearchPanel" ng-disabled="ancillaryService.loaded" class="btn btn-warning btn-block-search">SEARCH<span class="fa fa-search pull-right"></span></button>
+                        </div>
+                    </div>
+                    <div ng-controller="filtersController" class="personalized-search capital clearfix">
+                        <div education-popup="http://search/personalizedSearchToggle" direction="bottom|right" class="pull-left"><span class="personalized-text">Personalized search</span></div>
+                        <div ng-if="! isPersonalizedOutOfPolicy()" class="pull-right">
+                            <label class="switch">
+                                <input type="checkbox" ng-model="personalization.status" ng-change="setPersonalization(); changeSortOrder()" class="switch-input"><span data-on="On" data-off="Off" class="switch-label"></span><span class="switch-handle"></span>
+                            </label>
+                        </div>
+                        <div ng-if="isPersonalizedOutOfPolicy()" ns-popover ns-popover-template="out-of-policy.html" ns-popover-trigger="click" ns-popover-placement="bottom|right" ns-popover-timeout="-1" ns-popover-hide-on-click="false" ns-popover-theme="ns-popover-filters-green-bar-theme flight-details-filter" class="pull-right">
+                            <label class="switch">
+                                <input type="checkbox" class="switch-input"><span data-on="On" data-off="Off" class="switch-label"></span><span class="switch-handle"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div uib-collapse="isCollapsed" ng-include="'form-filters.html'" class="search-row filters-advanced"></div>
+        </div>
+        <div id="results-container" ng-controller="resultsController" class="results-container">
+            <div id="results-view" ng-include="'results.html'"></div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="inline_ancillary.html">
+    <li ng-repeat="ancillary in ancillaries | orderBy:'sortOrder'" ng-class="{privilege: ancillary.isCompanyPrivileged, purchased: ancillaryService.isSelectedOptionalAncillary(segment, ancillary)}" ancillary-popup="ancillary" ancillary-popup-optional="true" title="{{ancillary.title}}" ng-hide="personalizationService.isApplicableToPersona(leg) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" class="ancillary-popover-container"><img ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ancillary.type}}.png" alt="" class="icon"><img ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ancillary.type}}_orange.png" alt="" class="icon">
+        <p ng-if="ancillaryService.isOptionalAncillary(ancillary)">&#8364{{ancillary.price}}</p>
+    </li>
+</script>
+<script type="text/ng-template" id="inline_ancillary_included.html">
+    <li ng-repeat="ancillary in ancillaries | orderBy:'sortOrder'" ancillary-popup="ancillary" title="{{ancillary.title}}" class="ancillary-popover-container"><img ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ancillary.type}}_gray.png" ng-hide="personalizationService.isApplicableToPersona(leg) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" alt=""><img ng-if="!ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ancillary.type}}_green.png" alt=""><span ng-if="personalizationService.isApplicableToPersona(leg) &amp;&amp; ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" class="freebie-ancillary">FREEBIE</span><img ng-if="personalizationService.isApplicableToPersona(leg) &amp;&amp; ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-src="images/css/icons/ancillary/{{ancillary.type}}_blue.png" alt=""><img ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ancillary.type}}_orange.png" alt=""></li>
+</script>
+<script type="text/ng-template" id="results.html">
+    <e ng-if="noVisibleResults" class="no-results">
+        <h3>No results found</h3>
+        <p><b>Sorry, we couldn't find any flights for your selection. Please refine the filters or search again with different parameters.</b></p>
+    </e>
+    <div ng-repeat="direction in ['outbound', 'inbound']" ng-cloak ng-show="journeys[direction] &amp;&amp; !noVisibleResults">
+        <div id="filters-container" ng-if="showResultsContainer">
+            <div class="row header-results-bar-section">
+                <div education-popup="http://search/comparisonAlternatives" icon-color="orange" class="col-md-2 col-xs-3 text-center">
+                    <div ng-click="doCompare()" class="header-results-bar-option selection-denied hidden-xs hidden-sm"><span>Compare</span></div>
+                    <div ng-click="doCompare()" class="header-results-bar-option selection-denied hidden-md hidden-lg"><span class="fa fa-files-o"></span></div>
+                </div>
+                <!--.col-md-1.col-xs-3
+                .header-results-bar-option.selection-denied
+                  span.filter-picture Airline
+                -->
+                <div class="col-md-4 col-xs-6 text-left">
+                    <div ns-popover ns-popover-template="flight-details.html" ns-popover-trigger="click" ns-popover-placement="bottom|left" ns-popover-timeout="-1" ns-popover-hide-on-click="false" ns-popover-theme="ns-popover-filters-green-bar-theme flight-details-filter" class="header-results-bar-option selection-denied text-center"><span class="filter-picture">Flight Details</span></div>
+                </div>
+                <div education-popup="http://search/ancillariesServicesRichContent" icon-color="orange" class="col-md-3 hidden-sm hidden-xs text-left">
+                    <div ns-popover ns-popover-template="ancillary-services.html" ns-popover-trigger="click" ns-popover-placement="bottom|left" ns-popover-timeout="-1" ns-popover-theme="ns-popover-filters-green-bar-theme" class="header-results-bar-option selection-denied text-center"><span class="filter-picture">Ancillary Services</span></div>
+                </div>
+                <div class="col-md-1 hidden-sm hidden-xs">
+                    <div ns-popover ns-popover-template="flexibility.html" ns-popover-trigger="click" ns-popover-placement="bottom|left" ns-popover-timeout="-1" ns-popover-theme="ns-popover-filters-green-bar-theme" class="header-results-bar-option selection-denied"><span class="filter-picture">Flexibility</span></div>
+                </div>
+                <div class="col-md-2 col-xs-3 pos-relative">
+                    <div ns-popover ns-popover-template="sort-by-filter.html" ns-popover-trigger="click" ns-popover-placement="bottom|right" ns-popover-timeout="-1" ns-popover-theme="ns-popover-filters-green-bar-theme" class="header-results-bar-option selection-denied sort-by-filter text-center"><span>Sort by:&nbsp;</span><span class="sort-by-span">{{ getSortType() }}</span><i ng-if="sortOrder === 'asc'" ng-click="changeSortOrder('desc')" class="sort-type-caret fa fa-caret-down"></i><i ng-if="sortOrder === 'desc'" ng-click="changeSortOrder('asc')" class="sort-type-caret fa fa-caret-up"></i></div>
+                </div>
+            </div>
+            <div class="results-panel-direction">{{direction.charAt(0).toUpperCase() + direction.slice(1);}}</div>
+        </div>
+        <div ng-include="'resultItem.html'" ng-repeat="leg in flights = journeys[direction] | orderBy:[shouldGroupByCombinable(direction), flightSortExpression[$parent.flightsSortedBy]]:reverse" ng-model="leg" ng-cloak ng-show="isVisible() &amp;&amp; isFilterAllowed() &amp;&amp; isFlightDetailsFilterAllowed() &amp;&amp; isAdvancedFilterAllowed()" ng-controller="legController"></div>
+    </div>
+</script>
+<script type="text/ng-template" id="resultItem.html">
+    <div ng-cloak ng-show="leg.selectedClass === undefined" data-operating-airline="{{leg.operatingAirline}}" ng-class="{'has-segments': leg.segments.length &gt; 1, 'leg-details-hidden': !smDetailsVisible, 'just-for-you': personalizationService.isApplicableToPersona(leg) }" class="results-item">
+        <div ng-show="policyService.violatesRules(leg)" class="pos-absolute-full-height out-of-policy"></div>
+        <div ng-repeat="segment in leg.segments track by $index" ng-controller="segmentController" ng-class="{'leg-segment-nth': $index &gt; 0}" class="row leg-segment">
+            <dl class="just-for-you-cover col-md-2 col-xs-3 col-xs-offset-9 col-md-offset-10 pos-absolute-full-height">
+                <dt ng-if="$index == 0" education-popup="http://search/personalizedSearch" icon-type="2" icon-color="orange" direction="bottom|right" override-position-relative="true" class="pos-absolute-full-parent">
+                <h4>Just for you</h4>
+                </dt>
+                <dt ng-if="$index &gt; 0" class="pos-absolute-full-parent"></dt>
+            </dl>
+            <div class="col-airline col-md-2 col-xs-3 text-center">
+                <!--.gamification(ng-if="$index === 0") Collect {{ leg.gamificationPoints }} upsell points--><img ng-src="{{leg.operatingAirlineLogo}}" alt="Airline logo" class="airline-logo-gamification">
+                <div class="flight-code hidden-sm hidden-xs">{{segment.airlineData.flightCode}}</div>
+                <div ng-if="$index == 0 &amp;&amp; leg.segments.length == 1" class="airline-data-sm hidden-md hidden-lg text-center">
+                    <div class="flight-code">{{segment.airlineData.flightCode}}</div>
+                    <div class="flight-equipment">({{segment.equipment}})</div>
+                </div>
+            </div>
+            <div class="flight-details col-md-4 col-md-offset-2 hidden-sm hidden-xs">
+                <div class="row top">
+                    <div class="col-xs-4 time-from"><span>{{segment.schedule.departureDateString | dateStringFilter}}</span></div>
+                    <div class="col-xs-4 time-to"><span>{{segment.schedule.arrivalDateString | dateStringFilter}}</span></div>
+                    <div class="col-xs-4 time-duration"><span>{{segment.schedule.duration | duration }}</span></div>
+                </div>
+                <div class="row bottom text-left text-gray">
+                    <div class="col-xs-4 iata-from"><strong>{{segment.schedule.origin}}</strong></div>
+                    <div class="pos-absolute col-xs-3 col-xs-offset-1 arrow-picture"></div>
+                    <div class="col-xs-4 iata-to"><strong>{{segment.schedule.destination}}({{segment.equipment}})</strong></div>
+                    <div class="col-xs-4 percent-on-time text-dark"><strong>{{segment.onTime.valueHumanized}} %</strong><span>&nbsp;on time</span></div>
+                </div>
+            </div>
+            <div ng-if="$index == 0" class="flight-details-sm flight-details-shortcut col-xs-6 col-xs-offset-3 hidden-md hidden-lg">
+                <div class="row time-from-to">
+                    <div class="col-xs-5 time-from"><span>{{segment.schedule.departureDateString | dateStringFilter}}</span></div>
+                    <div class="col-xs-2 arrow-picture"></div>
+                    <div ng-if="leg.segments.length &gt; 1" class="stops col-xs-offset-5 col-xs-2">{{leg.stopOvers}}</div>
+                    <div class="col-xs-5 time-to text-right"><span>{{leg.segments[leg.segments.length-1].schedule.arrivalDateString | dateStringFilter}}</span></div>
+                </div>
+                <div class="row iata-from-to text-gray">
+                    <div class="col-xs-5">{{segment.schedule.origin}}</div>
+                    <div class="col-xs-5 col-xs-offset-2 text-right">{{leg.segments[leg.segments.length-1].schedule.destination}}</div>
+                </div>
+                <div ng-if="ancillaries.included &amp;&amp; ancillaries.included.length &gt; 0 &amp;&amp; leg.segments.length == 1" ng-class="{'included-ancillaries-solo':!ancillaries.optional.length &gt; 0}" class="row included-in-price">
+                    <div class="text-center">Included in price</div>
+                    <ul ng-repeat="ancillaries in [ancillaries.all]" ng-include="'inline_ancillary_included.html'" class="ancillaries center-block"></ul>
+                </div>
+                <div ng-if="leg.segments.length &gt; 1" class="row view-details text-center">
+                    <button type="button" ng-click="smViewDetails()" class="btn btn-success btn-details">View Details</button>
+                </div>
+            </div>
+            <div ng-if="leg.segments.length &gt; 1" class="flight-details-sm col-xs-6 col-xs-offset-3 hidden-md hidden-lg">
+                <div class="row time-from-to">
+                    <div class="col-xs-5 time-from"><span>{{segment.schedule.departureDateString | dateStringFilter}}</span></div>
+                    <div class="col-xs-2 arrow-picture"></div>
+                    <div class="col-xs-5 time-to text-right"><span>{{segment.schedule.arrivalDateString | dateStringFilter}}</span></div>
+                </div>
+                <div class="row iata-from-to text-gray">
+                    <div class="col-xs-5">{{segment.schedule.origin}}</div>
+                    <div class="col-xs-5 col-xs-offset-2 text-right">{{segment.schedule.destination}}</div>
+                </div>
+                <div ng-if="ancillaries.included &amp;&amp; ancillaries.included.length &gt; 0" ng-class="{'included-ancillaries-solo':!ancillaries.optional.length &gt; 0}" class="row included-in-price">
+                    <div class="text-center">Included in price</div>
+                    <ul ng-repeat="ancillaries in [ancillaries.all]" ng-include="'inline_ancillary_included.html'" class="ancillaries center-block"></ul>
+                </div>
+            </div>
+            <div ng-class="{'has-optional-extras': policyService.enableOptionalAncillaries() &amp;&amp; ancillaries.optional.length &gt; 0}" class="col-md-3 col-md-offset-4 col-ancillaries hidden-sm hidden-xs">
+                <div ng-show="ancillaries.included &amp;&amp; ancillaries.included.length &gt; 0" ng-class="{'included-ancillaries-solo':!ancillaries.optional.length &gt; 0}" class="row included-in-price">
+                    <div education-popup="http://search/ancillariesIncludedInPrice" class="col-md-3 text-center">Included <br />in price</div>
+                    <ul ng-repeat="ancillaries in [ancillaries.all]" ng-include="'inline_ancillary_included.html'" class="ancillaries col-md-9 center-block"></ul>
+                </div>
+                <div ng-show="policyService.enableOptionalAncillaries() &amp;&amp; ancillaries.optional.length &gt; 0" class="row optional-extras">
+                    <div education-popup="http://search/ancillariesOptional" class="col-md-3 text-center">Optional <br />extras</div>
+                    <ul ng-repeat="ancillaries in [ancillaries.optional]" ng-include="'inline_ancillary.html'" class="ancillaries col-md-9 center-block"></ul>
+                </div>
+            </div>
+            <div ng-if="!leg.segments.length == $index" class="col-md-1 col-fares pos-absolute-full-height col-md-offset-9 text-dark hidden-sm hidden-xs">
+                <div class="text-gray">{{ farePriceService.getSelectedFarePrice(leg).name}}</div>
+                <div class="strong">{{ farePriceService.getSelectedFarePrice(leg).class}}</div>
+                <div class="show-all-fares pos-absolute-bottom-left border-top-colored"><a ng-click="showAllFares(leg)">Show all<span class="arrow-part"> fares&nbsp;<span class="fa fa-angle-right"></span></span></a></div>
+            </div>
+            <div ng-if="!leg.segments.length == $index" class="price-block col-md-2 col-xs-3 col-xs-offset-6 col-md-offset-1">
+                <p><span class="currency">€</span><span class="price">{{ farePriceService.getRoundTripAncillariesPrice(leg).price + roundTripPrice(leg) }}</span></p>
+                <div ng-if="roundTripPrice(leg) &gt; 0" class="optionals"><span>Including <br />€ {{ roundTripPrice(leg) }} optionals for roundTrip</span></div>
+                <div ng-cloak ng-show="leg.combinable" ng-init="leg.combinable = true" ng-class="selectionMode">
+                    <label ng-class="{ 'orange-color-unselect': leg.selected === true }" class="btn btn-primary select-btn">
+                        <input type="checkbox" ng-model="leg.selected" ng-click="toggleFlight(leg)" class="hidden"><span ng-cloak ng-show="selectionMode == 'book'">{{ leg.selected === true ? "Unselect" : "Select" }}</span><span ng-cloak ng-show="selectionMode == 'compare'">{{ leg.selected === true ? "Unselect" : "Compare" }}</span>
+                    </label>
+                </div>
+                <div ng-if="personalizationService.isApplicableToPersona(leg)" class="optionals personalization-optionals"><span>EUR {{ roundTripFreeBieCost(leg, persona) }} <br /> EXTRA BUNDLED FREE</span></div>
+            </div>
+            <div ng-if="leg.segments.length &gt; 1 &amp;&amp; !leg.segments.length == $index" class="hr col-md-10 col-xs-9"></div>
+            <label ng-if="$index == 0" class="select-flight">
+                <input type="checkbox" ng-click="selectFlightToCompare(leg)" class="hidden"><span class="checkbox"></span>
+            </label>
+            <div class="vr col-md-offset-9 border-right-colored hidden-sm hidden-xs"></div>
+            <div class="vr col-md-offset-10 border-right-colored hidden-sm hidden-xs"></div>
+        </div>
+        <button ng-if="leg.segments.length &gt; 1" type="button" ng-click="smViewDetails()" title="Hide Details" class="pos-absolute-bottom-right btn btn-default btn-details-collapse hidden-md hidden-lg"><i class="fa fa-toggle-up"></i></button>
+    </div>
+</script>
+<script type="text/ng-template" id="checkout.html">
+    <div class="container-fluid checkout-page">
+        <div class="row selected-flight">
+            <div class="col-xs-12 selected-flight-text text-center strong"><span>Selected Flight</span></div>
+        </div>
+        <div ng-repeat="direction in ['outbound', 'inbound'] track by $index" class="row outbound-ticket-body">
+            <div class="strong outbound-ticket text-capitalize">{{ direction }}</div>
+            <div ng-repeat="segment in flight[direction].segments" ng-class="{ 'border-no-bottom' : flight[direction].segments.length &gt; 1 &amp;&amp; flight[direction].segments.length-1 == $index }" class="col-xs-12 ticket-body-segment">
+                <div class="col-xs-12 segment-optionals row-eq-height text-center">
+                    <div class="col-md-2 col-sm-3 col-xs-3">
+                        <div class="airline-logo"><img ng-src="{{ flight[direction].operatingAirlineLogo }}" alt="Airline logo"></div>
+                        <div>{{ segment.airlineData.flightCode }}</div>
+                    </div>
+                    <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                        <div>
+                            <div class="time-from"><span class="icon"><span class="capital">{{ segment.schedule.origin | airportName }}&nbsp;</span><span class="strong">({{ segment.schedule.origin }})</span></span></div>
+                        </div>
+                        <div><span class="strong">{{segment.schedule.departureDateString | dateStringFilter}}</span></div>
+                    </div>
+                    <div class="col-xs-1 arrow-picture"></div>
+                    <div class="col-md-2 col-sm-3 col-xs-3 time-and-from">
+                        <div>
+                            <div class="time-to"><span class="icon capital">{{ segment.schedule.destination | airportName }}&nbsp;<span class="strong">({{ segment.schedule.destination }})</span></span></div>
+                        </div>
+                        <div><span class="strong">{{segment.schedule.arrivalDateString | dateStringFilter}}</span></div>
+                    </div>
+                    <div class="col-md-3 visible-md visible-lg fare-price">
+                        <div><span>{{ farePriceService.getSelectedFarePrice(flight[direction]).name }}&nbsp;</span><span class="strong">{{ farePriceService.getSelectedFarePrice(flight[direction]).class }}</span></div>
+                        <div><span class="jet">({{ segment.equipment }} jet)</span></div>
+                    </div>
+                    <div ng-if="$index === 0" class="col-xs-2 ticket-body-price text-right"><span class="euro">€</span><span class="price">{{ getFairPrice(flight) }}</span></div>
+                </div>
+                <div class="col-sm-12 visible-sm visible-xs fare-price text-center">
+                    <div><span>{{ farePriceService.getSelectedFarePrice(flight[direction]).name }}&nbsp;</span><span class="strong">{{ farePriceService.getSelectedFarePrice(flight[direction]).class }}</span></div>
+                    <div><span class="jet">({{ segment.equipment }} jet)</span></div>
+                </div>
+                <div ng-if="segmentOptionalAncillaries(segment.ancillaries)" class="col-xs-12 optionals">
+                    <div education-popup="http://checkout/optionalExtras" class="col-xs-3 col-md-2 text-center optionals-extra">Optional extras</div>
+                    <div ng-controller="ancillaryController" class="col-xs-9 col-md-10">
+                        <div class="row top-row">
+                            <div class="col-xs-9 selected-ancillaries-block">
+                                <div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="selected-ancillaries center-block">
+                                    <label>
+                                        <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden"><span class="checkbox"></span>
+                                    </label><img ng-src="images/css/icons/ancillary/{{ ancillary.type }}_orange.png"><span class="ancillary-price strong">€ {{ ancillary.price }}</span>
+                                </div>
+                                <div ng-repeat="ancillary in segment.ancillaries" ng-if="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="selected-ancillaries personalized center-block pos-relative"><span class="personalized-text">FREEBIE</span><img ng-src="images/css/icons/ancillary/{{ ancillary.type }}_blue.png"><span class="ancillary-price strong">€ {{ ancillary.price }}</span></div>
+                            </div>
+                            <div ng-if="!ancillaryService.isAllOptionalAncillariesDeselected(segment)" class="col-xs-3 ticket-body-price text-right"><span class="euro">€</span><span class="price">{{ itineraryPriceService.getSelectedOptionalsPrice(flight[direction]) }}</span></div>
+                        </div>
+                        <div ng-class="{ 'border-no-top' : optionalTopBorder }" class="row bottom-row">
+                            <div ng-repeat="ancillary in segment.ancillaries" ng-if="ancillaryService.isOptionalAncillary(ancillary) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-hide="personalizationService.isApplicableToPersona(flight[direction]) &amp;&amp; ancillaryService.isPersonalizedAncillary(ancillary, persona)" ng-controller="ancillaryController" class="unselected-ancillaries center-block">
+                                <label>
+                                    <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden"><span class="checkbox"></span>
+                                </label><img ng-src="images/css/icons/ancillary/{{ ancillary.type }}.png"><span class="ancillary-price strong">€ {{ ancillary.price }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="$index === 1" class="col-xs-12 total-section text-right"><span class="total-text">Total</span><span class="euro total">€</span><span class="price">{{ getFairPrice(flight) }}</span></div>
+        </div>
+        <div class="row return-section">
+            <div class="col-xs-6 text-left return-section-text"><i class="fa fa-chevron-left"></i><a href="/#search/noReset">BACK</a></div>
+            <div class="col-xs-6 text-right return-section-button"><a href="/#/itinerary" class="btn btn-primary select-btn capital">Book</a></div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="itinerary.html">
+    <div class="container-fluid itinerary-page">
+        <div class="row header-row">
+            <div class="col-xs-7 text-left"><span class="itinerary-header">Your Itinerary</span><span class="flight-number">No. 16789</span></div>
+            <div class="col-xs-5 your-itinerary text-right nowrap">
+                <div class="total-price"><span>Total Price &nbsp;&nbsp;</span><span class="euro">€</span><span class="price">{{ totalPrice(farePriceService.getSelectedFarePrice(itinerary.legs.inbound).price) }}</span></div>
+                <div ng-if="totalAncillariesPrice() &gt; 0" class="included-in-price">(Includes €{{ totalAncillariesPrice() }} optionals)</div>
+            </div>
+        </div>
+        <div ng-repeat="direction in ['outbound', 'inbound']" class="directions">
+            <div ng-repeat="segment in itinerary.legs[direction].segments track by $index" ng-controller="itineraryController" class="leg-segment">
+                <div ng-if="$first" class="row header-block">
+                    <div class="col-md-2 col-xs-2 text-capitalize text-center strong h-direction">{{ direction }}</div>
+                    <div class="col-md-4 col-md-push-6 col-xs-10 h-buttons-col text-right">
+                        <button class="btn btn-primary online-checkin">Online Check-In</button>
+                        <button class="btn btn-primary export-to">Export To Calendar</button>
+                    </div>
+                    <div class="col-md-6 col-md-pull-4 h-from-to-col">
+                        <div class="time-from"><span class="icon"><span class="capital">{{ segment.schedule.origin | airportCity }}&nbsp;</span><span class="strong">({{ segment.schedule.origin }})</span></span></div>
+                        <div class="arrow-picture"></div>
+                        <div class="time-to"><span class="icon"><span class="capital">{{ getDestination(itinerary.legs[direction]) | airportCity }}&nbsp;</span><span class="strong">({{ getDestination(itinerary.legs[direction]) }})</span></span></div>
+                        <div class="time-duration nowrap hidden-xs"><span class="icon">{{itinerary.legs[direction].schedule.duration | duration }}</span></div>
+                    </div>
+                </div>
+                <div class="row segment-row text-left">
+                    <div class="col-md-2 col-xs-3 text-center airline-logo-container">
+                        <div class="airline-logo te"><img ng-src="{{ itinerary.legs[direction].operatingAirlineLogo }}" alt="Airline logo"></div>
+                        <div class="flight-code">{{ segment.airlineData.flightCode }}</div>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-3 time-duration nowrap"><span class="icon">{{ segment.schedule.duration | duration }}</span></div>
+                    <div class="col-md-6 col-sm-7 col-xs-6">
+                        <div class="row bordered-row-bottom from-to-row">
+                            <div class="col-md-10 col-xs-12">
+                                <div class="time-from"><span class="icon">{{segment.schedule.departureDateString | dateStringFilter}}</span></div><span class="nowrap"><span class="airport-name hidden-xs">{{ segment.schedule.origin | airportName}} &nbsp;</span><span class="airport-code strong">({{ segment.schedule.origin }})</span></span>
+                            </div>
+                            <div class="col-md-2 nowrap hidden-sm hidden-xs"><span>Terminal &nbsp;</span><span class="strong">5</span></div>
+                        </div>
+                        <div class="row from-to-row">
+                            <div class="col-md-10 col-xs-12">
+                                <div class="time-to"><span class="icon">{{segment.schedule.arrivalDateString | dateStringFilter}}</span></div><span class="nowrap"><span class="airport-name hidden-xs">{{ segment.schedule.destination | airportName}} &nbsp;</span><span class="airport-code strong">({{ segment.schedule.destination }})</span></span>
+                            </div>
+                            <div class="col-md-2 nowrap hidden-sm hidden-xs"><span>Terminal &nbsp;</span><span class="strong">2</span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-1 hidden-sm hidden-xs text-center line-height-10 nowrap">{{ segment.onTime.valueHumanized }}% on time</div>
+                    <div class="col-md-1 hidden-sm hidden-xs text-center line-height-10 no-padding-left">{{ itinerary.legs[direction].farePrices[0].name }}</div>
+                    <div class="col-md-1 hidden-sm hidden-xs text-center line-height-10 nowrap no-padding-left">{{ segment.equipment }} &nbsp;</div>
+                </div>
+                <div class="row segment-row bordered">
+                    <div class="col-md-2 hidden-sm hidden-xs border-part-hider"></div>
+                    <div ng-if="ancillaryService.getIncludedAncillaries(segment).length" class="col-md-5 margin-top-15">
+                        <div class="row optional-extras">
+                            <div class="col-xs-3 nowrap">Included in price</div>
+                            <div class="col-xs-6">
+                                <ul class="included-ancillary center-block">
+                                    <li ng-repeat="ancillary in ancillaryService.getIncludedAncillaries(segment)" class="ancillary"><img ng-src="images/css/icons/ancillary/{{ ancillary.type }}_green.png" class="ancillary-icon"></li>
+                                    <li ng-if="ancillaryService.isPersonalizedAncillary(ancillary, persona) &amp;&amp; !ancillaryService.isSelectedOptionalAncillary(segment, ancillary) &amp;&amp; personalizationService.isApplicableToPersona(itinerary.legs[direction])" ng-repeat="ancillary in ancillaryService.getOptionalAncillaries(segment)" class="ancillary pos-relative"><span class="personalized-text">FREEBIE</span><img ng-src="images/css/icons/ancillary/{{ ancillary.type }}_blue.png" class="ancillary-icon"></li>
+                                </ul>
+                            </div>
+                            <div ng-click="toggleAncillariesIncluded(segment)" class="col-xs-3 nowrap view-details"><a>View Details</a><i ng-class="{'fa-angle-double-down': section.included, 'fa-angle-double-up': !section.included}" class="fa"></i></div>
+                        </div>
+                    </div>
+                    <div ng-if="!ancillaryService.isAllOptionalAncillariesDeselected(segment)" class="bordered-row-top hidden-md hidden-lg"></div>
+                    <div ng-if="!ancillaryService.isAllOptionalAncillariesDeselected(segment)" ng-class="{ 'hidden-xs hidden-sm': !section.included}" class="col-md-5">
+                        <div class="row optional-extras">
+                            <div education-popup="http://itinerary/optionalExtras" class="col-xs-3 nowrap margin-top-15">Optional Extras</div>
+                            <div class="col-xs-6">
+                                <ul class="optional-ancillary center-block">
+                                    <li ng-if="ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-repeat="ancillary in ancillaryService.getOptionalAncillaries(segment)" class="ancillary"><img ng-hide="ancillaryService.isPersonalizedAncillary(ancillary, persona) &amp;&amp; personalizationService.isApplicableToPersona(itinerary.legs[direction])" ng-src="images/css/icons/ancillary/{{ ancillary.type }}_orange.png" class="ancillary-icon">
+                                        <p>€{{ ancillary.price }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div ng-click="toggleAncillariesOptional(segment)" class="col-xs-3 nowrap margin-top-15 view-details"><a>View Details</a><i ng-class="{'fa-angle-double-down': section.optional, 'fa-angle-double-up': !section.optional}" class="fa"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div uib-collapse="section.included" ng-model="section.included" ng-class="{ 'a-included': !section.included}" class="row ancillaries-dropdown">
+                    <dl ng-repeat="ancillary in flightAncillariesIncluded" class="row">
+                        <dt class="col-xs-6 col-sm-4 col-md-3 col-sm-offset-2">
+                        <h3>{{ ancillary.title }}</h3>
+                        <p>{{ ancillary.description }}</p>
+                        </dt>
+                        <dd class="col-xs-6 col-sm-4"><img ng-src="{{ ancillary.imageUrl }}"></dd>
+                    </dl>
+                </div>
+                <div uib-collapse="section.optional" ng-model="section.optional" ng-class="{ 'a-optional': !section.optional}" class="row ancillaries-dropdown">
+                    <dl ng-repeat="ancillary in flightAncillariesOptional" class="row">
+                        <dt class="col-xs-6 col-sm-4 col-md-3 col-sm-offset-2">
+                        <h3>{{ ancillary.title }}</h3>
+                        <p>{{ ancillary.description }}</p>
+                        </dt>
+                        <dd class="col-xs-6 col-sm-4"><img ng-src="{{ ancillary.imageUrl }}"></dd>
+                    </dl>
+                </div>
+                <div ng-if="itinerary.legs[direction].segments[$index+1]" class="row segment-separator">
+                    <div class="hr"></div>
+                    <div class="col-xs-1 col-xs-offset-2 pos-relative">
+                        <button class="btn btn-primary transfer-button"><span>{{ itinerary.legs[direction].segments[1].connectionTime | duration }}</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="compare.html">
+    <div class="container-fluid compare-page">
+        <div class="row text-center row-eq-height comparison-matrix-row">
+            <div education-popup="http://compare/comparisonMatrix" class="col-md-3 comparison-matrix background-green"><span>Comparison Matrix</span></div>
+            <div class="col-md-6">
+                <div class="flight-direction"><span class="time-from"><span class="icon"><span class="strong-500">{{ origin | airportCity }}</span><span class="strong-700">&nbsp;({{ origin }})</span></span></span><span class="arrow-picture"></span><span class="time-to"><span class="icon"><span class="strong-500">{{ destination | airportCity }}</span><span class="strong-700">&nbsp;({{ destination }})</span></span></span></div>
+            </div>
+            <div class="col-md-3"><a href="/#search/noReset" class="back-to-quotes"><span>Return to Quotes</span><i class="fa fa-chevron-right"></i></a></div>
+        </div>
+        <div class="main-table">
+            <table class="table table-responsive">
+                <thead>
+                <tr class="text-center">
+                    <th>Airlines</th>
+                    <th>Number of Stops</th>
+                    <th ng-class="{ 'bg-white': ancillaryToDisplay &amp;&amp; ancillaryToDisplay === ancillary.type }" ng-repeat="ancillary in uniqueAncillariesFromFlights" ng-click="selectAncillariesToDisplay(ancillary.type)" class="clickable"><img ng-if="!ancillaryToDisplay || ancillaryToDisplay !== ancillary.type" ng-src="images/css/icons/ancillary/{{ ancillary.type }}_white.png"><img ng-if="ancillaryToDisplay &amp;&amp; ancillaryToDisplay === ancillary.type" ng-src="images/css/icons/ancillary/{{ ancillary.type }}_green.png">
+                        <div ng-class="{ 'green': ancillaryToDisplay &amp;&amp; ancillaryToDisplay === ancillary.type }" class="ancillary-name">{{ ancillary | ancillaryName }}</div>
+                    </th>
+                    <th>Fare description</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="leg in flights track by $index" ng-class-even="'even-leg'">
+                <tr ng-repeat="segment in leg.segments" ng-class-even="'even-segment'" class="text-center">
+                    <td ng-if="!isTheSameAirline(leg)"><img ng-src="images/app/logos/{{ segment.airlineData.carryingAirlineCode.toLowerCase() }}.jpg"></td>
+                    <td ng-if="isTheSameAirline(leg) &amp;&amp; $first" rowspan="2"><img ng-src="{{ leg.operatingAirlineLogo }}"></td>
+                    <td ng-if="$first" rowspan="2">{{ leg.stopOvers }}</td>
+                    <td ng-repeat="ancillary in segment.ancillaries">
+                        <div ng-if="ancillary.fake"><span class="ancillary-span-x">X</span></div>
+                        <div ng-if="ancillary.price === 0">
+                            <label>
+                                <input type="checkbox" readonly checked disabled class="hidden"><span class="checkbox"></span>
+                            </label>
+                        </div>
+                        <div ng-if="ancillaryService.isPersonalizedAncillary(ancillary, persona) &amp;&amp; personalizationService.isEnabled()">
+                            <div class="ancillary-details"><img ng-if="!ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ ancillary.type }}_blue.png"></div>
+                        </div>
+                        <div ng-if="ancillary.price &gt; 0" ng-hide="ancillaryService.isPersonalizedAncillary(ancillary, persona) &amp;&amp; personalizationService.isEnabled()" ng-controller="ancillaryController" class="optional-ancillary-compare">
+                            <label>
+                                <input type="checkbox" ng-model="optional.selected" checked="isSelectedOptional" class="hidden"><span class="checkbox"></span>
+                            </label>
+                            <div class="ancillary-details"><img ng-if="!ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ ancillary.type }}.png"><img ng-if="ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-src="images/css/icons/ancillary/{{ ancillary.type }}_orange.png"><span>€<strong>{{ ancillary.price }}</strong></span></div>
+                        </div>
+                    </td>
+                    <td ng-if="$first" rowspan="2" class="fare-description">{{ leg.farePrices[$index].name }}</td>
+                    <td ng-if="leg.segments.length == 1" ng-class="{ 'just-for-you-compare': personalizationService.isApplicableToPersona(leg) }" class="price-cell">
+                        <dt ng-if="personalizationService.isApplicableToPersona(leg)" class="just-for-you-inscription">
+                        <h4>Just for you</h4>
+                        </dt>
+                        <p><span class="currency">€</span><span class="price">{{ flightPrice(leg) + farePriceService.getSelectedAncillariesPrice(leg)}}</span></p>
+                        <div ng-if="farePriceService.getSelectedAncillariesPrice(leg) &gt; 0" class="optionals text-center"><span>Includes <br />€ {{ farePriceService.getSelectedAncillariesPrice(leg) }} optionals</span></div>
+                        <button ng-click="bookFlight(leg)" class="btn btn-primary select-btn">Select</button>
+                        <div ng-if="personalizationService.isApplicableToPersona(leg) &amp;&amp; getFreebiePrice(leg) &gt; 0" class="personalized text-center"><span>EUR {{ getFreebiePrice(leg) }} EXTRA BUNDLED FREE</span></div>
+                    </td>
+                    <td ng-if="leg.segments.length &gt; 1 &amp;&amp; $index === 0" rowspan="2" ng-class="{ 'just-for-you-compare': personalizationService.isApplicableToPersona(leg) }" class="price-cell">
+                        <dt ng-if="personalizationService.isApplicableToPersona(leg)" class="just-for-you-inscription">
+                        <h4>Just for you</h4>
+                        </dt>
+                        <p><span class="currency">€</span><span class="price">{{ flightPrice(leg) + farePriceService.getSelectedAncillariesPrice(leg)}}</span></p>
+                        <div ng-if="farePriceService.getSelectedAncillariesPrice(leg) &gt; 0" class="optionals text-center"><span>Includes <br />€ {{ farePriceService.getSelectedAncillariesPrice(leg) }} optionals</span></div>
+                        <button ng-click="bookFlight(leg)" class="btn btn-primary select-btn">Select</button>
+                        <div ng-if="personalizationService.isApplicableToPersona(leg) &amp;&amp; getFreebiePrice(leg) &gt; 0" class="personalized text-center"><span>EUR {{ getFreebiePrice(leg) }} EXTRA BUNDLED FREE</span></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="legenda-table">
+            <table class="table table-responsive">
+                <tr>
+                    <td>
+                        <label>
+                            <input type="checkbox" readonly checked disabled class="hidden"><span class="checkbox"></span>
+                        </label><span class="legenda-text">Included in Price</span>
+                    </td>
+                    <td>
+                        <label>
+                            <input type="checkbox" class="hidden"><span class="checkbox"></span>
+                        </label><span class="legenda-text">Unselected Optional Extras</span>
+                    </td>
+                    <td><span class="legenda-selected-ancillary"></span><span class="legenda-text">Selected Optional Extras</span></td>
+                    <td><span class="legenda-freebie-ancillary"></span><span class="legenda-text">Freebie ancillary</span></td>
+                    <td><span class="ancillary-span-x legenda-x-span">X</span><span class="legenda-text">Unavailable</span></td>
+                </tr>
+            </table>
+        </div>
+        <div ng-repeat="leg in flights" class="row ancillaries-list">
+            <div class="text-center"><img ng-src="{{ leg.operatingAirlineLogo }}" height="65px"></div>
+            <div ng-show="!ancillaryToDisplay || ancillaryToDisplay === ancillary.type" ng-repeat="ancillary in leg.ancillaries" ng-class="{'every-fourth-box': $index % 3 == 0}" class="col-sm-4 ancillary-box-list">
+                <div class="ancillary-title-list">{{ ancillary.title }}</div>
+                <div class="row ancillary-block">
+                    <div class="col-xs-7"><img ng-src="{{ ancillary.imageUrl }}" width="100%"></div>
+                    <div class="col-xs-5 ancillary-description-list">{{ ancillary.description }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="education.html">
+    <div class="educational-popover-template">
+        <h3 ng-if="education.title" class="text-center">{{ education.title }}</h3>
+        <p ng-if="education.text">{{ education.text }}</p><img ng-if="education.image" ng-src="{{ education.image }}">
+        <ul ng-if="education.options" class="educational">
+            <li ng-repeat="option in education.options">{{ option }}</li>
+        </ul>
+        <p ng-if="education.footer">{{ education.footer }}</p>
+    </div>
+</script>
+<script type="text/ng-template" id="ancillary-popup.html">
+    <div class="ancillary-box">
+        <div ng-click="hidePopover()" class="ancillary-box-close">
+            <div class="ancillary-box-cross">x</div>
+        </div>
+        <div ng-if="ancillary.galleryImages.length" class="ancillary-title int-top-rounded">
+            <h2 ng-if="ancillary.isCompanyPrivileged">Company Privilege -</h2>
+            <h3>{{ancillary.title}}</h3>
+        </div>
+        <div ng-if="ancillary.galleryImages.length" ng-controller="galleryController" class="slider">
+            <div class="slide-croper"><img ng-repeat="image in ancillary.galleryImages" ng-swipe-right="showPrev()" ng-swipe-left="showNext()" ng-show="isActive($index)" ng-src="{{ image.url }}" class="slide ancillary-image"></div><a ng-click="showPrev()" class="arrow prev"></a><a ng-click="showNext()" class="arrow next"></a>
+            <ul class="nav">
+                <li ng-repeat="image in ancillary.galleryImages" ng-class="{'active':isActive($index)}"><img ng-src="{{ image.url }}" ng-click="showPhoto($index);"></li>
+            </ul>
+        </div>
+        <div ng-if="policyService.enableImage('ancillary') &amp;&amp; !ancillary.galleryImages.length" class="image-croper"><img ng-src="{{ancillary.imageUrl}}" class="ancillary-image int-top-rounded picture"></div>
+        <div ng-if="!ancillary.galleryImages.length" class="ancillary-title">
+            <h2 ng-if="ancillary.isCompanyPrivileged">Company Privilege -</h2>
+            <h3>{{ancillary.title}}</h3>
+        </div>
+        <p class="ancillary-description">{{ancillary.description}}</p>
+        <div ng-if="ancillaryService.isOptionalAncillary(ancillary)" ng-hide="ancillaryService.isPersonalizedAncillary(ancillary, persona) &amp;&amp; personalizationService.isApplicableToPersona(leg)" class="ancillary-price-and-button clearfix ancillary-optional"><b><span class="ancillary-popover-price"><span>€ {{ ancillary.price }}</span></span></b>
+            <div ng-if="policyService.enableOptionalAncillaries(ancillary)">
+                <button ng-cloak ng-show="!ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-click="hidePopover(); ancillaryService.selectOptionalAncillary(segment, ancillary)" class="btn ancillary-popover-btn pull-right">SELECT</button>
+                <button ng-cloak ng-show="ancillaryService.isSelectedOptionalAncillary(segment, ancillary)" ng-click="hidePopover(); ancillaryService.deselectOptionalAncillary(segment, ancillary)" class="btn ancillary-popover-btn pull-right">UNSELECT</button>
+            </div>
+            <div ng-if="!policyService.enableOptionalAncillaries(ancillary)" class="text-center">
+                <button class="btn policy-not-allowed">OUT OF POLICY</button>
+            </div>
+        </div>
+    </div>
+</script>
+<!--Filters bar templates-->
+<script type="text/ng-template" id="sort-by-filter.html">
+    <div class="triangle hidden-xs"></div>
+    <div class="green-menu">
+        <div class="green-menu-header">
+            <ul ng-repeat="sortCriteria in flightsSortCriteria track by $index" ng-click="sortBy(sortCriteria.value)" class="filter-list-green selection-denied sort-by-ul">
+                <li>{{ sortCriteria.label }}</li>
+                <hr ng-if="pricesList.length-1 !== $index">
+            </ul>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="flight-details.html">
+    <div class="triangle hidden-xs"></div>
+    <div ng-controller="filtersController" class="green-menu">
+        <div class="green-menu-header"><span class="text-bold">DEPARTURE TIME</span></div>
+        <div ng-init="outbound.from[direction] = 0; outbound.to[direction] = 23" class="noUI-slider-container">
+            <div slider ng-from="outbound.from[direction]" ng-to="outbound.to[direction]" start="0" end="23" step="1"></div>
+            <div class="noUI-slider-values">
+                <div style="left: 0%" class="min"><span ng-bind="outbound.from[direction]"></span><span>:00</span></div>
+                <div style="left: 90%" class="max"><span ng-bind="outbound.to[direction]"></span><span>:00</span></div>
+            </div>
+        </div>
+        <hr>
+        <div class="green-menu-header"><span class="text-bold">ARRIVAL TIME</span></div>
+        <div ng-init="inbound.from[direction] = 0; inbound.to[direction] = 23" class="noUI-slider-container">
+            <div slider ng-from="inbound.from[direction]" ng-to="inbound.to[direction]" start="0" end="23" step="1"></div>
+            <div class="noUI-slider-values">
+                <div style="left: 0%" class="min"><span ng-bind="inbound.from[direction]"></span><span>:00</span></div>
+                <div style="left: 90%" class="max"><span ng-bind="inbound.to[direction]"></span><span>:00</span></div>
+            </div>
+        </div>
+        <hr>
+        <div class="green-menu-header"><span class="text-bold">DURATION</span></div>
+        <div ng-init="duration.to = 14; duration.max[direction] = duration.to" class="noUI-slider-container">
+            <div slider ng-model="duration.max[direction]" start="0" end="{{duration.to}}" step="1" class="single-handle"></div>
+            <div class="noUI-slider-values">
+                <div style="left: 0%" class="min"><span>0h</span></div>
+                <div style="left: 95%" class="max"><span ng-bind="duration.to"></span><span>h</span></div>
+            </div>
+        </div>
+        <hr>
+        <div class="green-menu-header"><span class="text-bold">STOPS</span></div>
+        <ul class="row">
+            <li class="col-sm-3">
+                <label class="stop-type-label">ANY
+                    <input type="radio" ng-model="stop.type[direction]" value="Any"><span class="pull-left"></span>
+                </label>
+            </li>
+            <li class="col-sm-3">
+                <label class="stop-type-label">DIRECT
+                    <input type="radio" ng-model="stop.type[direction]" value="Direct"><span class="pull-left"></span>
+                </label>
+            </li>
+            <li class="col-sm-3">
+                <label class="stop-type-label">1 STOP
+                    <input type="radio" ng-model="stop.type[direction]" value="1 stop"><span class="pull-left"></span>
+                </label>
+            </li>
+            <li class="col-sm-3">
+                <label class="stop-type-label">2+ STOPS
+                    <input type="radio" ng-model="stop.type[direction]" value="2 stop"><span class="pull-left"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+</script>
+<script type="text/ng-template" id="ancillary-services.html">
+    <div class="triangle"></div>
+    <div ng-controller="filtersController" class="green-menu">
+        <div class="green-menu-header"><span class="text-bold">AIRPORT</span></div>
+        <ul class="filter-list-green selection-denied">
+            <li ng-repeat="ancillary in journeys track by $index" ng-if="ancillaryService.isAirportAncillary(ancillary)">
+                <label>{{ancillary | ancillaryName}}
+                    <input type="checkbox" ng-model="ancillary.selected" ng-change="isSelectedAncillary(ancillary)" class="hidden"><span class="checkbox"></span>
+                </label>
+            </li>
+        </ul>
+        <hr class="col-md-10">
+        <div class="green-menu-header"><span class="text-bold">IN FLIGHT</span></div>
+        <ul class="filter-list-green selection-denied">
+            <li ng-repeat="ancillary in journeys track by $index" ng-if="ancillaryService.isInFlightAncillary(ancillary)">
+                <label>{{ancillary | ancillaryName}}
+                    <input type="checkbox" ng-model="ancillary.selected" ng-change="isSelectedAncillary(ancillary)" class="hidden"><span class="checkbox"></span>
+                </label>
+            </li>
+        </ul>
+        <hr class="col-md-10">
+        <div class="green-menu-header"><span class="text-bold">BAGGAGE</span></div>
+        <ul class="filter-list-green selection-denied">
+            <li ng-repeat="ancillary in journeys track by $index" ng-if="ancillaryService.isBagAncillary(ancillary)">
+                <label>{{ancillary | ancillaryName}}
+                    <input type="checkbox" ng-model="ancillary.selected" ng-change="isSelectedAncillary(ancillary)" class="hidden"><span class="checkbox"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
+</script>
+<script type="text/ng-template" id="flexibility.html">
+    <div class="triangle"></div>
+    <div ng-controller="filtersController" class="green-menu">
+        <div class="green-menu-header">
+            <ul ng-repeat="price in pricesList track by $index" class="filter-list-green selection-denied">
+                <li>
+                    <label class="text-bold">{{ price.name }}
+                        <input type="checkbox" ng-model="price.selected" ng-change="isSelectedPriceType(price)" class="hidden"><span class="checkbox"></span>
+                    </label>
+                </li>
+                <hr ng-if="pricesList.length-1 !== $index">
+            </ul>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="form-filters.html">
+    <div class="row">
+        <div ng-repeat="direction in ['outbound', 'inbound']" class="col-sm-6 form-filters no-side-padding">
+            <div class="form-filters-direction text-center text-capitalize">{{ direction }}</div>
+            <div ng-controller="advancedFiltersController" class="row">
+                <div class="col-xs-4">
+                    <div class="green-menu-header"><span class="text-bold">AIRPORT</span></div>
+                    <ul class="filter-list-green form-filters-list selection-denied">
+                        <li ng-repeat="ancillary in journeys track by $index" ng-if="ancillaryService.isAirportAncillary(ancillary)">
+                            <label>{{ancillary | ancillaryName}}
+                                <input type="checkbox" ng-model="ancillary.selected" ng-change="isSelectedAncillary(ancillary)" class="hidden"><span class="checkbox"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-4">
+                    <div class="green-menu-header"><span class="text-bold">IN FLIGHT</span></div>
+                    <ul class="filter-list-green form-filters-list selection-denied">
+                        <li ng-repeat="ancillary in journeys track by $index" ng-if="ancillaryService.isInFlightAncillary(ancillary)">
+                            <label>{{ancillary | ancillaryName}}
+                                <input type="checkbox" ng-model="ancillary.selected" ng-change="isSelectedAncillary(ancillary)" class="hidden"><span class="checkbox"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xs-4">
+                    <div class="green-menu-header"><span class="text-bold">BAGGAGE</span></div>
+                    <ul class="filter-list-green form-filters-list selection-denied">
+                        <li ng-repeat="ancillary in journeys track by $index" ng-if="ancillaryService.isBagAncillary(ancillary)">
+                            <label>{{ancillary | ancillaryName}}
+                                <input type="checkbox" ng-model="ancillary.selected" ng-change="isSelectedAncillary(ancillary)" class="hidden"><span class="checkbox"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+<script type="text/ng-template" id="out-of-policy.html">
+    <div class="text-center">
+        <h4>This user does not have rights to access Personalized search content</h4>
+        <button style="margin-bottom:10px" class="btn policy-not-allowed">OUT OF POLICY</button>
+    </div>
+</script>
+
+<div id="nspopover-1" class="ns-popover-bottom-placement ns-popover-left-align ns-popover-list-theme ng-scope" style="position: absolute; display: none;">
+    <div class="educational-popover-template">
+        <!-- ngIf: education.title --><h3 ng-if="education.title" class="text-center ng-binding ng-scope">Purchase optional ancillaries</h3><!-- end ngIf: education.title -->
+        <!-- ngIf: education.text --><!-- ngIf: education.image -->
+        <!-- ngIf: education.options --><ul ng-if="education.options" class="educational ng-scope">
+        <!-- ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">Optional ancillaries can be selected at any time during the booking process, including at check-out.</li><!-- end ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">The selection/unselection of optional ancillaries is coupled with dynamic price updates and controlled by policy.</li><!-- end ngRepeat: option in education.options -->
+    </ul><!-- end ngIf: education.options -->
+        <!-- ngIf: education.footer -->
+    </div>
+</div><div id="nspopover-2" class="ns-popover-bottom-placement ns-popover-left-align ns-popover-list-theme ng-scope" style="position: absolute; display: none;">
+    <div class="educational-popover-template">
+        <!-- ngIf: education.title --><h3 ng-if="education.title" class="text-center ng-binding ng-scope">Purchase optional ancillaries</h3><!-- end ngIf: education.title -->
+        <!-- ngIf: education.text --><!-- ngIf: education.image -->
+        <!-- ngIf: education.options --><ul ng-if="education.options" class="educational ng-scope">
+        <!-- ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">Optional ancillaries can be selected at any time during the booking process, including at check-out.</li><!-- end ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">The selection/unselection of optional ancillaries is coupled with dynamic price updates and controlled by policy.</li><!-- end ngRepeat: option in education.options -->
+    </ul><!-- end ngIf: education.options -->
+        <!-- ngIf: education.footer -->
+    </div>
+</div><div id="nspopover-3" class="ns-popover-bottom-placement ns-popover-left-align ns-popover-list-theme ng-scope" style="position: absolute; display: none;">
+    <div class="educational-popover-template">
+        <!-- ngIf: education.title --><h3 ng-if="education.title" class="text-center ng-binding ng-scope">Purchase optional ancillaries</h3><!-- end ngIf: education.title -->
+        <!-- ngIf: education.text --><!-- ngIf: education.image -->
+        <!-- ngIf: education.options --><ul ng-if="education.options" class="educational ng-scope">
+        <!-- ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">Optional ancillaries can be selected at any time during the booking process, including at check-out.</li><!-- end ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">The selection/unselection of optional ancillaries is coupled with dynamic price updates and controlled by policy.</li><!-- end ngRepeat: option in education.options -->
+    </ul><!-- end ngIf: education.options -->
+        <!-- ngIf: education.footer -->
+    </div>
+</div><div id="nspopover-4" class="ns-popover-bottom-placement ns-popover-left-align ns-popover-list-theme ng-scope" style="position: absolute; display: none;">
+    <div class="educational-popover-template">
+        <!-- ngIf: education.title --><h3 ng-if="education.title" class="text-center ng-binding ng-scope">Purchase optional ancillaries</h3><!-- end ngIf: education.title -->
+        <!-- ngIf: education.text --><!-- ngIf: education.image -->
+        <!-- ngIf: education.options --><ul ng-if="education.options" class="educational ng-scope">
+        <!-- ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">Optional ancillaries can be selected at any time during the booking process, including at check-out.</li><!-- end ngRepeat: option in education.options --><li ng-repeat="option in education.options" class="ng-binding ng-scope">The selection/unselection of optional ancillaries is coupled with dynamic price updates and controlled by policy.</li><!-- end ngRepeat: option in education.options -->
+    </ul><!-- end ngIf: education.options -->
+        <!-- ngIf: education.footer -->
+    </div>
+</div></body></html>

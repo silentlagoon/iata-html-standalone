@@ -1,0 +1,164 @@
+//Globals
+$PageHeaderBackground: white;
+
+//Tables
+$TableRedBackgroundColor: #ff5554;
+$TableGreenBackgroundColor: #00b4af;
+$RedBackgroundTextColor: #fff;
+$border-orange: #faa630;
+$border-purple: #9962c4;
+$border-red: #ff5554;
+$border-teal: #2fc0e7;
+$border-yellow: #ffe58a;
+$TableBorder: lightgrey;
+$TableBackgroundGrey:  #f9f9f8;
+$TextColorGreen: #32c1be;
+
+.reports-page {
+
+  .content-custom-container {
+    padding-top: 0;
+  }
+
+  //col-sm
+  @media (max-width: 991px) {
+    .page-name {
+      text-align: center;
+    }
+
+    .info-table {
+      margin-top: 10px !important;
+    }
+  }
+
+  .page-header-custom {
+    background-color: $PageHeaderBackground;
+    -webkit-box-shadow: 0px 0px 10px 0px #d6d6d6;
+    -moz-box-shadow: 0px 0px 10px 0px #d6d6d6;
+    box-shadow: 0px 0px 10px 0px #d6d6d6;
+
+    .options {
+      padding-bottom: 10px;
+      margin-top: 17px;
+      padding-right: 0;
+      cursor: pointer;
+
+      &.border-right {
+        border-right: 1px solid #efefef;
+      }
+    }
+  }
+
+  .info-table {
+    margin-top: 50px;
+
+    .table-container-custom {
+      border: 30px solid #fff;
+      border-top: 0;
+      -webkit-box-shadow: 2px 2px 10px 0px #e3e3e3;
+      -moz-box-shadow: 2px 2px 10px 0px #e3e3e3;
+      box-shadow: 2px 2px 10px 0px #e3e3e3;
+
+      .row-eq-height {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+      }
+    }
+  }
+
+  .table-header-red {
+    margin-left: -45px;
+    margin-right: -45px;
+  }
+
+  .table-header-green {
+    margin-left: -45px;
+    margin-right: -45px;
+    background-color: #00b4af;
+
+    .border-orange {
+      border-bottom: 3px solid $border-orange;
+    }
+
+    .border-purple {
+      border-bottom: 3px solid $border-purple;
+    }
+
+    .border-red {
+      border-bottom: 3px solid $border-red;
+    }
+
+    .border-teal {
+      border-bottom: 3px solid $border-teal;
+    }
+
+    .border-yellow {
+      border-bottom: 3px solid $border-yellow;
+    }
+
+    .border-green {
+      border-bottom: 3px solid $TableGreenBackgroundColor;
+    }
+  }
+
+  .table-row-red {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: $RedBackgroundTextColor;
+    background-color: $TableRedBackgroundColor;
+
+    span {
+      font-size: 24px;
+    }
+  }
+
+  .table-row-green {
+    font-weight: 700;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: $RedBackgroundTextColor;
+  }
+
+  .content-row {
+    margin-left: -30px;
+    margin-right: -30px;
+    padding: 8px;
+    background-color: #fff;
+    border-bottom: 1px solid $TableBorder;
+
+    .image-circle {
+      margin-right: 15px;
+      border-radius: 50%;
+      background: $TableGreenBackgroundColor;
+    }
+
+    &.gray {
+      background-color: $TableBackgroundGrey
+    }
+
+    &.text-color-green {
+      font-weight: 800;
+      color: $TextColorGreen;
+    }
+
+    .total-padding {
+      text-align: left;
+      padding-left: 50px;
+    }
+  }
+  .btn-new-policies {
+    cursor: default;
+    background-color: $border-orange;
+    padding: 0;
+    margin-top: 6px;
+  }
+  .button-row {
+    padding-right: 25px;
+  }
+  .excell-icon {
+    top: 24px;
+    right: 7px;
+  }
+}

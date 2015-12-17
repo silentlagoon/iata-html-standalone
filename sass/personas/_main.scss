@@ -1,0 +1,75 @@
+$white: #fff;
+$color_default_text: #888;
+.persona-page {
+  background: white;
+  .persona {
+    background-color: $white;
+    border: 3px solid #085994;
+    color: $color_default_text;
+    margin-top: 15px;
+    padding: 15px;
+    @include box-shadow(0 2px 2px 2px rgba(0,0,0,0.2));
+    border-radius: 20px;
+    overflow: hidden;
+
+    h3 {
+      margin: 0;
+    }
+
+    &.travel-manager {
+      margin-bottom: 40px;
+    }
+
+    .persona-bio {
+      float: left;
+      text-align: center;
+      width: 150px;
+      margin-right:33px;
+    }
+
+    .access-levels {
+      float: left;
+      li {
+
+        &:before {
+          content: "\2713";
+          font-size: 1em;
+          font-weight: bold;
+          padding-right: 10px;
+          display: inline-block;
+        }
+      }
+    }
+
+    .persona-name {
+      color: darken($color_default_text,10);
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .user-level {
+      color: lighten($color_default_text,10);
+    }
+
+    .persona-picture {
+      border-radius: 100%;
+      border: 1px solid #aaa;
+      width: 80px;
+      height: 80px;
+      padding: 5px;
+      float: left;
+      box-shadow: 0 2px 2px 1px rgba(0,0,0,0.2);
+    }
+
+    &:hover {
+      background-color: darken($white, 2%);
+      @include box-shadow(0 0 3px 3px rgba(255,255,255,0.25));
+      cursor: pointer;
+
+      .persona-picture {
+        @include box-shadow(0 0 3px 3px rgba(0,0,0,0.15));
+      }
+    }
+  }
+}
+

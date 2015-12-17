@@ -1,0 +1,52 @@
+$hidden-sidebar-width : 0;
+$width_page_min: 768px;
+$width_side_bar: 220px;
+
+ol, ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tmc-search {
+  .page-wrap {
+    @extend .clearfix;
+    min-width: $width_page_min;
+  }
+
+  .content {
+    max-width: 100%;
+    margin-left: $width_side_bar + 15px;
+    margin-top: $height_user_bar;
+    @incluce transition(all 0.2s ease);
+
+    &.maxwidth {
+      max-width: 1024px;
+      margin: 65px auto 10px;
+    }
+  }
+
+  .side {
+    width: $width_side_bar;
+    float: left;
+    position: fixed;
+    bottom:0;
+    top: $height_iata_bar+$height_user_bar;
+    z-index: 5;
+
+    @include transform(translateX(0));
+    @include transform(all 0.2s ease);
+  }
+}
+
+.sidebar-off {
+  .content {
+    margin-left: $hidden-sidebar-width + 15px;
+  }
+  .side {
+    @include transform(translateX(-($width_side_bar - $hidden-sidebar-width)));
+  }
+  .result-columns {
+    left: $hidden-sidebar-width + 31px;
+  }
+}

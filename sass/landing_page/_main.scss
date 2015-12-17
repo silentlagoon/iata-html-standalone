@@ -1,0 +1,38 @@
+.landing-page {
+  background: #fff;
+  p {
+    font-size: 18px;
+    font-weight: 300;
+  }
+  ul {
+    li {
+      font-size: 18px;
+    }
+  }
+  h1 {
+    font-size: 35px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  ul {
+    li {
+      font-size: 18px;
+      font-weight: 300;
+    }
+  }
+  .image-row {
+    .col-sm-4 {
+      margin-top: 15px;
+      img {
+        display: block;
+        width: auto;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        @include box-shadow(3px 3px 10px 2px rgba(0,0,0,0.3));
+      }
+    }
+  }
+}
+

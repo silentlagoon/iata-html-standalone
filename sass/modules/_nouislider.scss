@@ -1,0 +1,268 @@
+/* Functional styling;
+ * These styles are required for noUiSlider to function.
+ * You don't need to change these rules to apply your design.
+ */
+
+$noUi-horizontal-height: 8px; //18px;
+$noUi-horizontal-handle-width: (2.5 * $noUi-horizontal-height) + 2; //34px;
+$noUi-horizontal-handle-height: (2.5 * $noUi-horizontal-height) + 2; //28px;
+$noUi-horizontal-handle-top: -1 * (($noUi-horizontal-height / 2) + 4);
+$noUi-horizontal-handle-left: -1 * ($noUi-horizontal-handle-width / 2);
+
+$noUi-vertical-width: $noUi-horizontal-height; //18px;
+$noUi-vertical-handle-width: $noUi-horizontal-handle-height; //28px;
+$noUi-vertical-handle-height: $noUi-horizontal-handle-width; //34px;
+$noUi-vertical-handle-top: $noUi-horizontal-handle-left; //-17px;
+$noUi-vertical-handle-left: $noUi-horizontal-handle-top; //-6px;
+
+$noUi-extended: 15px;
+$noUi-handle-border-radius: 50%; //3px;
+$noUi-connect-bg-color: #3FB8AF;
+
+$noUi-handle-marker-height: $noUi-horizontal-height - 2; //14px;
+$noUi-handle-marker-left: ($noUi-horizontal-handle-width / 2) - 3; //12px;
+$noUi-handle-marker-top: ($noUi-horizontal-handle-height / 2 ) - ($noUi-handle-marker-height / 2) - 1; //6px;
+$noUi-handle-marker-color: #E8E7E6;
+$noUi-handle-marker-hover-color: $noUi-connect-bg-color;
+
+
+.noUi-target, .noUi-target * {
+  -webkit-touch-callout: none;
+  -ms-touch-action: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  @include box-sizing(border-box);
+}
+.single-handle {
+  .noUi-base {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#905b10+0,fbc06d+40,f99d1c+100 */
+    background: #905b10; /* Old browsers */
+    background: -moz-linear-gradient(top,  #905b10 0%, #fbc06d 40%, #f99d1c 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#905b10), color-stop(40%,#fbc06d), color-stop(100%,#f99d1c)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#905b10', endColorstr='#f99d1c',GradientType=0 ); /* IE6-9 */
+  }
+
+  &.noUi-target, .noUi-target {
+    background-color: $noUi-connect-bg-color;
+  }
+  .noUi-origin {
+    //background-color: white;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#bdbdbd+0,e7e7e7+100 */
+    background: #bdbdbd; /* Old browsers */
+    background: -moz-linear-gradient(top,  #bdbdbd 0%, #e7e7e7 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bdbdbd), color-stop(100%,#e7e7e7)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #bdbdbd 0%,#e7e7e7 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #bdbdbd 0%,#e7e7e7 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #bdbdbd 0%,#e7e7e7 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #bdbdbd 0%,#e7e7e7 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdbdbd', endColorstr='#e7e7e7',GradientType=0 ); /* IE6-9 */
+  }
+}
+.noUi-base {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 4px;
+}
+
+.noUi-origin {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.noUi-handle {
+  position: relative;
+  z-index: 1;
+}
+
+.noUi-stacking {
+  .noUi-handle {
+    /* This class is applied to the lower origin when
+       its values is > 50%. */
+    z-index: 10;
+  }
+  + .noUi-origin {
+    /* Fix stacking order in IE7, which incorrectly
+       creates a new context for the origins. */
+    *z-index: -1;
+  }
+}
+
+.noUi-state-tap .noUi-origin {
+  @include transition(left 0.3s, top 0.3s);
+}
+
+.noUi-state-drag * {
+  cursor: inherit !important;
+}
+
+/* Slider size and handle placement;
+ */
+
+.noUi-horizontal {
+  height: $noUi-horizontal-height;
+  .noUi-handle {
+    border: 3px solid white;
+    width: 13px;//$noUi-horizontal-handle-width;
+    height: 13px;//$noUi-horizontal-handle-height;
+    left: -10px;//$noUi-horizontal-handle-left;
+    top: -4px//$noUi-horizontal-handle-top;
+  }
+  &.noUi-extended {
+    padding: 0 $noUi-extended;
+    .noUi-origin {
+      right: -$noUi-extended;
+    }
+  }
+}
+
+.noUi-vertical {
+  width: $noUi-vertical-width;
+  .noUi-handle {
+    width: $noUi-vertical-handle-width;
+    height: $noUi-vertical-handle-height;
+    left: $noUi-vertical-handle-left;
+    top: $noUi-vertical-handle-top;
+  }
+  &.noUi-extended {
+    padding: $noUi-extended 0;
+    .noUi-origin {
+      bottom: -$noUi-extended;
+    }
+  }
+}
+
+/* Styling;
+ */
+
+.noUi-background {
+  /*background: #FAFAFA;
+  box-shadow: inset 0 1px 1px #f0f0f0;*/
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#bdbdbd+0,e7e7e7+100 */
+  background: #bdbdbd; /* Old browsers */
+  background: -moz-linear-gradient(top,  #bdbdbd 0%, #e7e7e7 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bdbdbd), color-stop(100%,#e7e7e7)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #bdbdbd 0%,#e7e7e7 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #bdbdbd 0%,#e7e7e7 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #bdbdbd 0%,#e7e7e7 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #bdbdbd 0%,#e7e7e7 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bdbdbd', endColorstr='#e7e7e7',GradientType=0 ); /* IE6-9 */
+}
+
+.noUi-connect {
+  /*background: $noUi-connect-bg-color;
+  @include box-shadow(inset 0 0 3px rgba(51, 51, 51, 0.45));
+  @include transition(background 450ms);*/
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#905b10+0,fbc06d+40,f99d1c+100 */
+  background: #905b10; /* Old browsers */
+  background: -moz-linear-gradient(top,  #905b10 0%, #fbc06d 40%, #f99d1c 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#905b10), color-stop(40%,#fbc06d), color-stop(100%,#f99d1c)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #905b10 0%,#fbc06d 40%,#f99d1c 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#905b10', endColorstr='#f99d1c',GradientType=0 ); /* IE6-9 */
+
+}
+
+.noUi-origin {
+  border-radius: 4px;
+}
+
+.noUi-target {
+  border-radius: 4px;
+//  border: 1px solid #D3D3D3;
+  @include box-shadow(inset 0 1px 1px #f0f0f0, 0 3px 6px -5px #bbbbbb);
+  &.noUi-connect {
+    @include box-shadow(inset 0 0 3px rgba(51, 51, 51, 0.45), 0 3px 6px -5px #bbbbbb);
+  }
+}
+
+/* Handles and cursors;
+ */
+
+.noUi-dragable {
+  cursor: w-resize;
+}
+
+.noUi-vertical .noUi-dragable {
+  cursor: n-resize;
+}
+
+.noUi-handle {
+  border: 1px solid #D9D9D9;
+  border-radius: $noUi-handle-border-radius;
+  background: #FFF;
+  cursor: default;
+  @include box-shadow(inset 0 0 1px white, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbbbbb);
+}
+
+.noUi-active {
+  @include box-shadow(inset 0 0 1px white, inset 0 1px 7px #dddddd, 0 3px 6px -3px #bbbbbb);
+}
+
+/* Handle stripes;
+ */
+
+.noUi-handle {
+  &:before, &:after  {
+    content: "";
+    display: block;
+    position: absolute;
+    height: $noUi-handle-marker-height; //14px;
+    width: 1px;
+    background: $noUi-handle-marker-color;
+    left: $noUi-handle-marker-left; //14px;
+    top: $noUi-handle-marker-top; //6px;
+  }
+  &:after {
+    left: $noUi-handle-marker-left + 3; //17px;
+  }
+  &:hover {
+    &:before, &:after  {
+      background: $noUi-handle-marker-hover-color;
+    }
+  }
+}
+
+.noUi-vertical .noUi-handle {
+  &:before, &:after {
+    width: $noUi-handle-marker-height; //14px;
+    height: 1px;
+    left: $noUi-handle-marker-top; //6px;
+    top: $noUi-handle-marker-left; //14px;
+  }
+  &:after {
+    top: $noUi-handle-marker-left+ 3; //17px;
+  }
+}
+
+/* Disabled state;
+ */
+
+[disabled] {
+  &.noUi-connect, .noUi-connect {
+    background: #B8B8B8;
+  }
+  .noUi-handle {
+    cursor: not-allowed;
+  }
+}
+
+/* Blocked state;
+ */
+
+.noUi-state-blocked {
+  &.noUi-connect, .noUi-connect {
+    background: lighten($noUi-connect-bg-color, 10%);
+  }
+}

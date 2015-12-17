@@ -1,0 +1,339 @@
+$selectButtonColor: #00b4af;
+$totalSectionBackground: #f4f4f4;
+$bordersColor: #cccccc;
+
+.checkout-page {
+  margin-left: 15px;
+  margin-right: 15px;
+
+  .selected-flight {
+    background-color: #f9f8f8;
+    font-size: 19px;
+    border: 1px solid $bordersColor;
+
+    .selected-flight-text {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .return-section {
+    background-color: #fff;
+    font-size: 24px;
+    border-right: 1px solid $bordersColor;
+    border-left: 1px solid $bordersColor;
+    border-bottom: 1px solid $bordersColor;
+
+    .return-section-text {
+      margin-top: 15px;
+
+      a {
+        cursor: pointer;
+        color: #b2b2b2;
+        text-decoration: none;
+        padding-left: 10px;
+      }
+
+      i {
+        cursor: pointer;
+        color: #b2b2b2;
+      }
+    }
+
+    .return-section-button {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+
+  .select-btn {
+    background-color: $selectButtonColor;
+    border-color: $selectButtonColor;
+    font-size: 20px;
+
+    &:hover {
+      background-color: $selectButtonColor;
+      border-color: $selectButtonColor;
+    }
+  }
+
+  .outbound-ticket{
+    text-align: center;
+    font-size: 18px;
+    //padding-left: 0;
+    background-color: #fff;
+    border-bottom: 1px solid $bordersColor;
+  }
+
+  .outbound-ticket-body {
+    background-color: #fff;
+    border-right: 1px solid $bordersColor;
+    border-left: 1px solid $bordersColor;
+    border-bottom: 1px solid $bordersColor;
+
+    .ticket-body-segment {
+      padding-left: 0;
+      padding-right: 0;
+      border-bottom: 1px solid $bordersColor;
+
+      .segment-optionals {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        /*padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 0;
+        padding-right: 0;*/
+        border-bottom: 1px solid $bordersColor;
+
+        .airline-logo{
+          img {
+            width: 80px;
+          }
+        }
+      }
+    }
+  }
+
+  .total-section {
+    min-height: 47px; //47px is the height of Selected Flight due to font size
+    line-height: 47px;
+    background-color: $totalSectionBackground;
+    padding-right: 30px;
+
+    .total-text {
+      padding-right: 20px;
+    }
+    .price {
+      color: #ed0085;
+      font-size: 30px;
+      font-weight: 700;
+    }
+  }
+
+  .time-and-from {}
+
+  .arrow-picture {
+    margin-top: 11px;
+    padding: 0;
+    overflow: hidden;
+    text-align: right;
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 100px;
+      margin-left: -100px;
+      height: 12px;
+      background: url('../images/css/icons/results/arow.png') no-repeat;
+    }
+  }
+
+  .time-from,
+  .time-to,
+  .time-duration {
+    span {
+      line-height: 34px;
+      padding-left: 28px;
+      padding-bottom: 2px;
+    }
+  }
+  .time-from {
+    .icon {
+      background: url('../images/css/icons/results/from.png') no-repeat 0 50%;
+      background-color: white;
+      position: relative;
+      z-index: 1;
+      padding-right: 10px;
+      span {
+        padding: 0;
+      }
+    }
+  }
+  .time-to {
+    .icon {
+      background: url('../images/css/icons/results/to.png') no-repeat 0 50%;
+      span {
+        padding: 0;
+      }
+    }
+  }
+  .time-duration {
+    .icon {
+      background: url('../images/css/icons/results/time_ico.png') no-repeat 0 50%;
+      font-size: 0.7em;
+    }
+  }
+
+  .fare-price {
+    margin-top: 9px;
+
+    .jet {
+      color: #888888;
+    }
+  }
+
+  .ticket-body-price {
+    padding-top: 12px;
+    font-size: 30px;
+    font-weight: 600;
+
+    .price {
+      color: #00aded;
+    }
+  }
+
+  .euro {
+    font-size: 30px;
+    font-weight: 600;
+    color: #aeaeae;
+    &.total {
+      font-weight: 700;
+    }
+  }
+
+  .optionals {
+    background-color: #fff;
+
+    .top-row {
+      .selected-ancillaries-block {
+        padding-bottom: 17px;
+        padding-right: 0;
+        padding-left: 0;
+        padding-top: 8px;
+      }
+    }
+
+    .bottom-row {
+      border-top: 1px solid $bordersColor;
+      padding-bottom: 12px;
+    }
+  }
+
+  .selected-ancillaries {
+    display: inline-block;
+
+    label {
+      position: relative;
+      color: black;
+      margin-right: 0;
+      text-transform: none;
+      padding-left: $size_checkbox + 8px;
+      font-family: $para_fontstack;
+      line-height:35px;
+      cursor: pointer;
+      font-weight: 400;
+      bottom: 8px;
+
+      .hidden {
+        display: none;
+        @extend %custom-checkbox-green;
+      }
+
+      .checkbox {
+        @include size($size_checkbox);
+        position: absolute;
+        top: -2px;
+        left: 0;
+        z-index: 0;
+        background-size: 11px 9px;
+      }
+    }
+
+    &.personalized {
+      img {
+        height: 23px;
+      }
+      .personalized-text {
+        position: absolute;
+        font-size: 8px;
+        top: -10px;
+        left: -2px;
+        color:  #6176AC;
+      }
+    }
+
+    img {
+      height: 27px;
+    }
+  }
+
+  .unselected-ancillaries {
+    display: inline-block;
+    padding-right: 40px;
+
+    label {
+      position: relative;
+      color: black;
+      margin-right: 0;
+      text-transform: none;
+      padding-left: $size_checkbox + 8px;
+      font-family: $para_fontstack;
+      line-height:35px;
+      cursor: pointer;
+      font-weight: 400;
+      bottom: 8px;
+
+      .hidden {
+        display: none;
+        @extend %custom-checkbox-green;
+      }
+
+      .checkbox {
+        @include size($size_checkbox);
+        margin-top: 8px;
+        position: absolute;
+        top: -2px;
+        left: 0;
+        z-index: 0;
+        background-size: 11px 9px;
+      }
+    }
+
+    img {
+      height: 27px;
+    }
+  }
+
+  .ancillary-price {
+    font-size: 20px;
+    height: 17px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+
+  .optionals-extra {
+    margin-top: 40px;
+  }
+
+  .border-no-bottom {
+    border-bottom: 0 none !important;
+  }
+
+  .border-no-top {
+    border-top: 0 none !important;
+  }
+
+  .row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .checkout-page {
+    margin-left: 0;
+    margin-right: 0;
+
+    .unselected-ancillaries {
+      padding-right: 0;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .fare-price {
+    border-bottom: 1px solid $bordersColor;
+  }
+}

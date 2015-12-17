@@ -1,0 +1,141 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  min-width: 490px;
+  color: #434343;
+  margin-top: 50px !important;
+}
+
+a {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clearfix:before, .clearfix:after {
+  content: "";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  *zoom: 1;
+}
+
+.global-shadow {
+  @include box-shadow(2px 2px 1px rgba(0,0,0,0.2));
+}
+
+.personalize {
+  background: mediumpurple;
+}
+
+.pos-relative {
+  position: relative;
+}
+.pos-absolute {
+  position: absolute;
+}
+.pos-absolute-full-height {
+  @extend .pos-absolute;
+  top: 0;
+  bottom: 0;
+}
+.pos-absolute-full-parent {
+  @extend .pos-absolute-full-height;
+  left: 0;
+  right: 0;
+}
+.pos-absolute-top-left {
+  @extend .pos-absolute;
+  left:0;
+  top: 0;
+}
+.pos-absolute-top-right {
+  @extend .pos-absolute;
+  right:0;
+  top: 0;
+}
+.pos-absolute-bottom-left {
+  @extend .pos-absolute;
+  left:0;
+  bottom: 0;
+}
+.pos-absolute-bottom-right {
+  @extend .pos-absolute;
+  right:0;
+  bottom: 0;
+}
+
+.capital {
+  text-transform: uppercase;
+}
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+nav.iata {
+  .btn-xs-menu {
+    border: 0 none;
+    color: #aeaeae;
+    float: left;
+    margin: 15px 12px 0 0;
+    background: none;
+  }
+  .logo {
+    margin-right: -10px;
+  }
+}
+
+.selection-denied {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+// Extra small devices
+@media (max-width: 767px) { //@screen-xs-max
+  nav.iata {
+    .toggles {
+      @include box-shadow(#eee 2px 2px 2px);
+      position: absolute;
+      top: 50px;
+      left: 0;
+      right: 0;
+      //display: block !important;
+      background: #fff;
+      padding: 15px;
+      border-bottom: 1px solid #aaa;
+      li {
+        display: block;
+        float: none;
+        border-bottom: 1px solid #eee;
+        a {
+          text-align: left;
+        }
+        &:last-child {
+          border-bottom: 0 none;
+        }
+      }
+    }
+  }
+}
+
+// Extra small devices and Small devices Tablets
+@media (max-width: 991px) {
+  //@screen-sm-min and @screen-sm-max
+  nav.iata {
+    position: absolute;
+    z-index: 3;
+    //tmp solution, need to optimize
+    min-width: initial;
+  }
+}
